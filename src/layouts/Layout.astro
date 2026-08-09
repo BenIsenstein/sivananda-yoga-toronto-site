@@ -1,15 +1,14 @@
 ---
 import '../styles/global.css';
+import { site } from '@/config/site';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = 'Toronto Sivananda Yoga Vedanta Centre',
-  description = 'Yoga and meditation classes, courses, workshops and retreats in Toronto.',
-} = Astro.props;
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} | ${site.shortName}` : site.name;
 ---
 
 <!doctype html>
@@ -19,10 +18,23 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {/* No-flash theme init: set .dark before first paint */}
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const dark = stored ? stored === 'dark' : systemDark;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (err) {
+          console.debug('theme init skipped', err);
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body class="min-h-screen bg-background text-foreground">
     <slot />
   </body>
 </html>

@@ -1,0 +1,111 @@
+---
+/** Site footer: contact, policies, socials, newsletter. Light + dark aware. */
+import { site, policyNav } from '@/config/site';
+import Button from '@/components/ui/Button.astro';
+
+const { contact, social } = site;
+---
+
+<footer class="mt-24 border-t border-border bg-sidebar text-sidebar-foreground">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+    {/* Contact */}
+    <div class="space-y-2">
+      <h2 class="font-serif text-lg font-semibold">Contact Us</h2>
+      <address class="text-sm text-muted-foreground not-italic leading-relaxed">
+        {contact.address}<br />
+        {contact.city}, {contact.region}, {contact.postalCode}<br />
+        <a href={contact.phoneHref} class="hover:text-foreground">{contact.phone}</a><br />
+        <a href={`mailto:${contact.email}`} class="hover:text-foreground">{contact.email}</a><br />
+        <a
+          href={contact.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-foreground">Google Map</a
+        >
+      </address>
+    </div>
+
+    {/* Policies */}
+    <nav class="space-y-2" aria-label="Policies">
+      <h2 class="font-serif text-lg font-semibold">Policies</h2>
+      <ul class="space-y-1 text-sm">
+        {
+          policyNav.map((p) => (
+            <li>
+              <a
+                href={p.href}
+                class="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {p.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    {/* Newsletter + social */}
+    <div class="space-y-4">
+      <div class="space-y-2">
+        <h2 class="font-serif text-lg font-semibold">Stay Connected</h2>
+        <p class="text-sm text-muted-foreground">Get updates on classes, workshops and events.</p>
+        <Button href={site.external.newsletter} external variant="outline" size="sm">
+          Join our newsletter
+        </Button>
+      </div>
+      <div class="flex gap-3">
+        <a
+          href={social.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          class="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+            ><path
+              d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"
+            ></path></svg
+          >
+        </a>
+        <a
+          href={social.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            ><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"
+            ></circle><path d="M17.5 6.5h.01"></path></svg
+          >
+        </a>
+        <a
+          href={social.youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="YouTube"
+          class="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+            ><path
+              d="M23 12s0-3.4-.4-5c-.2-.9-.9-1.6-1.8-1.8C19.1 5 12 5 12 5s-7.1 0-8.8.4c-.9.2-1.6.9-1.8 1.8C1 8.6 1 12 1 12s0 3.4.4 5c.2.9.9 1.6 1.8 1.8C4.9 19 12 19 12 19s7.1 0 8.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-5 .4-5ZM10 15V9l5 3-5 3Z"
+            ></path></svg
+          >
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-border">
+    <div class="mx-auto max-w-6xl px-4 py-5 text-center text-xs text-muted-foreground sm:px-6">
+      &copy; {new Date().getFullYear()}
+      {site.name}. All rights reserved.
+    </div>
+  </div>
+</footer>

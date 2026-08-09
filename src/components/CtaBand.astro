@@ -1,0 +1,34 @@
+---
+/** CtaBand — full-width call-to-action strip. Light + dark aware. */
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  external?: boolean;
+}
+
+const {
+  title = 'Begin your practice',
+  text = 'Small, teacher-supported classes for every level. Health is wealth; peace of mind is happiness.',
+  ctaLabel = 'Explore classes',
+  ctaHref = '/schedule',
+  external = false,
+} = Astro.props;
+---
+
+<section class="bg-primary text-primary-foreground">
+  <div
+    class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-14 text-center sm:px-6 md:flex-row md:justify-between md:text-left"
+  >
+    <div class="space-y-2">
+      <h2 class="text-3xl text-primary-foreground">{title}</h2>
+      <p class="max-w-xl text-primary-foreground/90">{text}</p>
+    </div>
+    <Button href={ctaHref} external={external} variant="secondary" size="lg" class="shrink-0">
+      {ctaLabel}
+    </Button>
+  </div>
+</section>

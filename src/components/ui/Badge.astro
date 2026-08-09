@@ -1,0 +1,30 @@
+---
+/** Badge — small status/label pill. Light + dark aware. */
+import { cn } from '@/lib/utils';
+
+type Variant = 'primary' | 'secondary' | 'muted' | 'outline';
+
+interface Props {
+  variant?: Variant;
+  class?: string;
+}
+
+const { variant = 'primary', class: className } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: 'bg-primary text-primary-foreground',
+  secondary: 'bg-secondary text-secondary-foreground',
+  muted: 'bg-muted text-muted-foreground',
+  outline: 'border border-border text-foreground',
+};
+---
+
+<span
+  class={cn(
+    'inline-flex items-center rounded-full px-3 py-0.5 text-xs font-medium tracking-wide',
+    variants[variant],
+    className
+  )}
+>
+  <slot />
+</span>

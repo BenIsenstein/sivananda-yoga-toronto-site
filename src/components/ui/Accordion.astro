@@ -1,0 +1,31 @@
+---
+/**
+ * Accordion — accessible, vanilla JS (no React). Light + dark aware.
+ * Usage: pass an array of { title, id } and provide named slots per id,
+ * or use <AccordionItem> children directly.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div
+  class:list={['divide-y divide-border rounded-xl border border-border', className]}
+  data-accordion
+>
+  <slot />
+</div>
+
+<script>
+  document.querySelectorAll('[data-accordion]').forEach((root) => {
+    root.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const panel = document.getElementById(btn.getAttribute('aria-controls') || '');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (panel) panel.hidden = expanded;
+      });
+    });
+  });
+</script>

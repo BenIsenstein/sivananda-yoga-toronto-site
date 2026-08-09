@@ -9,6 +9,23 @@ at <https://sivanandacanada.org/toronto/> using Astro.
 - **After each epic is finished, do not commit.** Ask for review and permission, then commit.
 - Preserve at minimum every _type_ of content on the current site (page structure may change).
 - Drop stale/dead pages (see "Dropped" below).
+- **Keep the theme preview page** (`/theme-preview`) — this build goes to the client for review.
+- **Build every page/component light + dark aware** using semantic tokens (no hardcoded colors).
+
+## Content decisions
+
+- **Founding timeline (synthesized from two live pages; confirm with client):**
+  - **1959** — the International Sivananda Yoga Vedanta Centres organization founded
+    (by Swami Vishnudevananda). _(Source: Our Centre page.)_
+  - **1962** — the Sivananda tradition / Toronto chapter established.
+    _(Source: About page.)_
+  - **1992** — the current Centre at 77 Harbord Street established.
+    _(Source: Our Centre page.)_
+  - Present as a timeline; add a hidden `TODO(client): confirm 1959/1962/1992` note.
+- **Legacy FAQ links** (`beginners-yoga-courses`, `class-prices`, etc.) → re-point to new routes
+  (`/new-to-yoga`, `/schedule`).
+- Preserve verbatim lists (e.g. Community Outreach partners/causes); do not invent copy.
+  Source facts captured in `content-source/NOTES.md`.
 
 ## Decisions locked in
 
@@ -52,8 +69,9 @@ at <https://sivanandacanada.org/toronto/> using Astro.
 - **Policies:** `/policies/*` (terms, refund, privacy, data-privacy, anti-harassment, misconduct)
 - Auto-generated `sitemap.xml`; **301 redirects** from old WP URLs
 
-**Dropped as dead:** `sample-page`, `tabs`, `event-directory`, `summer-sale` (2019),
-duplicate `classes` / `yoga-camp`, dead 2019 blog posts.
+**Dropped as dead (do not migrate):** `sample-page`, `tabs`, `event-directory`,
+`summer-sale` (2019), duplicate/legacy schedule pages (`classes`, `yoga-camp`,
+`yoga-class-descriptions` duplicate), and dead 2019 blog posts (`post-sitemap`).
 
 ---
 
@@ -79,17 +97,94 @@ duplicate `classes` / `yoga-camp`, dead 2019 blog posts.
 
 ### Epic 2 — Core UI components (native `.astro`)
 
-- [ ] Header w/ multi-level nav (mobile drawer)
-- [ ] Footer (policies, social, newsletter, contact)
-- [ ] Button, Card, Badge, Tabs, Accordion (FAQ)
-- [ ] Hero section, CTA bands
+- [x] Header w/ multi-level nav (mobile drawer) + theme toggle (light/dark/system)
+- [x] Footer (policies, social, newsletter, contact)
+- [x] Button, Card, Badge, Tabs, Accordion (all token-styled, light + dark)
+- [x] Hero section, CTA band
+- [x] `cn()` util, `@/*` path alias, central `site.ts` config (nav/contact/social)
+- [x] Re-read live site → `content-source/NOTES.md` (verbatim facts; flagged 1962/1992 discrepancy)
 
-### Epic 3 — Content migration
+### Epic 3 — Content migration (full fidelity)
 
-- [ ] Content Collections: `pages`, `courses`, `events`, `policies`
-- [ ] Migrate copy → Markdown (About, Our Centre, Teachers, What We Teach, New to Yoga,
-      Courses, Community Outreach, Rental, Contact, FAQ, all Policies)
+Collections: `pages`, `courses`, `policies` (the `events` collection is defined in Epic 5).
+All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; images via
+`astro:assets`. Expand `site.ts` nav to make every new route reachable.
+
+**Setup**
+
+- [ ] Define content collections + schemas (`src/content.config.ts`)
+- [ ] Expand `site.ts` nav (inspiration, full courses, retreats subpages, kids/teens, satsang, fundraiser)
+
+**About hub + subpages**
+
+- [ ] `/about` — card directory hub (Teachers, Teachings, Our Centre, New to Yoga, FAQ, Outreach)
+- [ ] `/about/our-centre` — prose + 1959/1962/1992 timeline (hidden TODO) + gallery
+- [ ] `/about/teachers` — Tabs: Swami Sivananda / Swami Vishnudevananda (verbatim)
+- [ ] `/about/what-we-teach` — Tabs: 5 Points / 4 Paths / Sivananda Class
+- [ ] `/about/community-outreach` — prose + verbatim fundraising & program-site lists
+- [ ] `/about/rental` — halls, capacities, kitchen, email CTA
+- [ ] `/about/inspiration` — Dose of Yoga Inspiration
+
+**Get started**
+
+- [ ] `/new-to-yoga` — Yoga 1 & 2, package discount, 2-week pass
+
+**Courses**
+
+- [ ] `/courses` — hub (card grid)
+- [ ] `/courses/meditation`
+- [ ] `/courses/private`
+- [ ] `/courses/pranayama`
+- [ ] `/courses/ayurvedic-nutrition`
+- [ ] `/courses/philosophy`
+- [ ] `/courses/vedic-studies`
+- [ ] `/courses/nada-yoga`
+
+**Classes (content only; interactive grid in Epic 4)**
+
+- [ ] `/class-descriptions`
+
+**Retreats & Training**
+
+- [ ] `/retreats/weekend-retreat`
+- [ ] `/training/chair-yoga` (teacher training)
+- [ ] `/training/gentle-yoga` (teacher training)
+- [ ] `/training/prenatal-yoga` (teacher training)
+
+**Kids / Teens / Family**
+
+- [ ] `/kids-teens/kids-yoga`
+- [ ] `/kids-teens/teen-yoga`
+- [ ] `/kids-teens/for-parents`
+
+**Satsang / Spiritual**
+
+- [ ] `/satsang` (free group meditation)
+- [ ] `/satsang/sunday-prayers`
+- [ ] `/satsang/puja`
+
+**Support**
+
+- [ ] `/fundraiser` (Donate remains an external Square link)
+
+**Contact & FAQ**
+
+- [ ] `/contact` — address, hours, directions (form deferred to Epic 8)
+- [ ] `/faq` — Accordion; legacy links re-pointed
+
+**Policies (6)**
+
+- [ ] `/policies/terms`
+- [ ] `/policies/refund`
+- [ ] `/policies/privacy`
+- [ ] `/policies/data-privacy`
+- [ ] `/policies/anti-harassment`
+- [ ] `/policies/misconduct` (links existing PDF)
+
+**Wrap-up**
+
 - [ ] Download & optimize images → `astro:assets`
+- [ ] Verify all nav targets resolve (no 404s); light + dark pass
 - [ ] Owner review pass
 
 ### Epic 4 — Schedule & Booking

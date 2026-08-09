@@ -1,0 +1,48 @@
+---
+/** AccordionItem — a single collapsible row within <Accordion>. */
+interface Props {
+  title: string;
+  id: string;
+  open?: boolean;
+}
+const { title, id, open = false } = Astro.props;
+const panelId = `accordion-panel-${id}`;
+const btnId = `accordion-trigger-${id}`;
+---
+
+<div>
+  <h3 class="m-0">
+    <button
+      type="button"
+      id={btnId}
+      data-accordion-trigger
+      aria-controls={panelId}
+      aria-expanded={open ? 'true' : 'false'}
+      class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-serif text-lg text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring"
+    >
+      <span>{title}</span>
+      <svg
+        class="size-5 shrink-0 text-muted-foreground transition-transform [button[aria-expanded=true]_&]:rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </button>
+  </h3>
+  <div
+    id={panelId}
+    role="region"
+    aria-labelledby={btnId}
+    hidden={!open}
+    class="px-5 pb-5 text-muted-foreground"
+  >
+    <slot />
+  </div>
+</div>

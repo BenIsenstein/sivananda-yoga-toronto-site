@@ -25,6 +25,11 @@ epic-by-epic backlog live in **`BACKLOG.md`** — treat it as the source of trut
    guessing. Prefer objective, honest technical guidance over agreement.
 7. **Keep the theme preview page** (`/theme-preview`). This build goes to the client for
    review, so the preview must stay available. Do NOT remove it during development.
+8. **Build every component and page dark-theme aware.** Support light AND dark mode at
+   every step. Use semantic token classes (`bg-background`, `text-foreground`,
+   `bg-primary`, `border-border`, etc.) so both modes work automatically — never hardcode
+   colors and avoid `dark:` overrides for semantic colors. Verify both modes before
+   finishing any epic.
 
 ## Tech stack & conventions
 

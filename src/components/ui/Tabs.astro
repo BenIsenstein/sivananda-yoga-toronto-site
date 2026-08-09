@@ -1,0 +1,79 @@
+---
+/**
+ * Tabs — accessible, vanilla JS (no React). Light + dark aware.
+ * Props: tabs = [{ id, label }]. Provide a named slot per tab id.
+ */
+interface Tab {
+  id: string;
+  label: string;
+}
+interface Props {
+  tabs: Tab[];
+  class?: string;
+}
+const { tabs, class: className } = Astro.props;
+---
+
+<div class:list={['w-full', className]} data-tabs>
+  <div role="tablist" class="flex flex-wrap gap-1 border-b border-border" aria-label="Content tabs">
+    {
+      tabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          data-tab-trigger={tab.id}
+          aria-controls={`tabpanel-${tab.id}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          class="-mb-px border-b-2 border-transparent px-4 py-2.5 font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-selected:border-primary aria-selected:text-foreground"
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+  <div class="pt-6">
+    {
+      tabs.map((tab, i) => (
+        <div
+          role="tabpanel"
+          id={`tabpanel-${tab.id}`}
+          data-tab-panel={tab.id}
+          aria-labelledby={`tab-${tab.id}`}
+          hidden={i !== 0}
+        >
+          <slot name={tab.id} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-tabs]').forEach((root) => {
+    const triggers = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tab-trigger]'));
+
+    function select(id: string) {
+      triggers.forEach((t) => {
+        const active = t.dataset.tabTrigger === id;
+        t.setAttribute('aria-selected', String(active));
+        t.tabIndex = active ? 0 : -1;
+        const panel = root.querySelector<HTMLElement>(`[data-tab-panel="${t.dataset.tabTrigger}"]`);
+        if (panel) panel.hidden = !active;
+      });
+    }
+
+    triggers.forEach((trigger, i) => {
+      trigger.addEventListener('click', () => select(trigger.dataset.tabTrigger!));
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        const dir = e.key === 'ArrowRight' ? 1 : -1;
+        const next = triggers[(i + dir + triggers.length) % triggers.length];
+        next.focus();
+        select(next.dataset.tabTrigger!);
+      });
+    });
+  });
+</script>

@@ -1,0 +1,17 @@
+---
+/** Card — token-styled surface. Light + dark aware. */
+import { cn } from '@/lib/utils';
+
+interface Props {
+  class?: string;
+  as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
+}
+
+const { class: className, as: Tag = 'div' } = Astro.props;
+---
+
+<Tag
+  class={cn('rounded-xl border border-border bg-card text-card-foreground shadow-sm', className)}
+>
+  <slot />
+</Tag>

@@ -1,0 +1,171 @@
+---
+/** Site header: multi-level nav, mobile drawer, theme toggle. Light + dark aware. */
+import { mainNav, site } from '@/config/site';
+import Button from '@/components/ui/Button.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a href="/" class="font-serif text-lg font-semibold text-foreground sm:text-xl">
+      {site.shortName}
+    </a>
+
+    {/* Desktop nav */}
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
+      {
+        mainNav.map((item) =>
+          item.children ? (
+            <div class="group relative">
+              <a
+                href={item.href ?? '#'}
+                class="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+              >
+                {item.label}
+                <svg
+                  class="size-3.5 text-muted-foreground"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </a>
+              <div class="invisible absolute left-0 top-full min-w-56 rounded-lg border border-border bg-popover p-1.5 opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    target={child.external ? '_blank' : undefined}
+                    rel={child.external ? 'noopener noreferrer' : undefined}
+                    class="block rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-muted"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class="rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            >
+              {item.label}
+            </a>
+          )
+        )
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <Button href={site.external.book} external size="sm" class="hidden sm:inline-flex"
+        >Book</Button
+      >
+      <ThemeToggle />
+      {/* Mobile menu button */}
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="inline-flex size-10 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-muted lg:hidden"
+        aria-label="Open menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+      >
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg
+        >
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile drawer */}
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden lg:hidden">
+    <div id="mobile-overlay" class="absolute inset-0 bg-foreground/40"></div>
+    <div
+      class="absolute right-0 top-0 h-full w-80 max-w-[85vw] overflow-y-auto border-l border-border bg-sidebar text-sidebar-foreground p-5 shadow-xl"
+    >
+      <div class="mb-4 flex items-center justify-between">
+        <span class="font-serif text-lg font-semibold">Menu</span>
+        <button
+          type="button"
+          id="mobile-close-btn"
+          class="inline-flex size-9 items-center justify-center rounded-md hover:bg-muted"
+          aria-label="Close menu"
+        >
+          <svg
+            class="size-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg
+          >
+        </button>
+      </div>
+      <nav class="flex flex-col gap-1" aria-label="Mobile">
+        {
+          mainNav.map((item) =>
+            item.children ? (
+              <details class="group">
+                <summary class="flex cursor-pointer items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
+                  {item.label}
+                  <svg
+                    class="size-4 transition-transform group-open:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="ml-3 flex flex-col border-l border-border pl-3">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      target={child.external ? '_blank' : undefined}
+                      rel={child.external ? 'noopener noreferrer' : undefined}
+                      class="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </details>
+            ) : (
+              <a href={item.href} class="rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
+                {item.label}
+              </a>
+            )
+          )
+        }
+        <Button href={site.external.book} external class="mt-3">Book a class</Button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const drawer = document.getElementById('mobile-drawer');
+  const openBtn = document.getElementById('mobile-menu-btn');
+  const closeEls = ['mobile-close-btn', 'mobile-overlay'].map((id) => document.getElementById(id));
+
+  function setOpen(open: boolean) {
+    drawer?.classList.toggle('hidden', !open);
+    openBtn?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  openBtn?.addEventListener('click', () => setOpen(true));
+  closeEls.forEach((el) => el?.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+</script>

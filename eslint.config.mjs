@@ -9,5 +9,13 @@ export default tseslint.config(
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs.recommended
+  ...eslintPluginAstro.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        // Astro-provided global namespace for JSX intrinsic element types.
+        astroHTML: 'readonly',
+      },
+    },
+  }
 );

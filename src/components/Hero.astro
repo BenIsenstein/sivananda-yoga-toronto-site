@@ -1,0 +1,37 @@
+---
+/** Hero — homepage headline section with subtle token-based gradient. Light + dark aware. */
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { site } from '@/config/site';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  eyebrow = 'Classical Sivananda tradition',
+  title = 'Yoga & Meditation in Toronto',
+  subtitle = 'Daily Hatha yoga classes, courses, workshops and retreats — in person at 77 Harbord Street and online.',
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden border-b border-border">
+  {/* Decorative, theme-aware gradient wash */}
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,var(--accent)_0%,transparent_70%)] opacity-60"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-32">
+    <Badge variant="secondary" class="mb-6">{eyebrow}</Badge>
+    <h1 class="text-5xl text-foreground sm:text-6xl">{title}</h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">{subtitle}</p>
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <Button href="/new-to-yoga" size="lg">New to Yoga?</Button>
+      <Button href="/schedule" variant="outline" size="lg">View Schedule</Button>
+      <Button href={site.external.book} external variant="ghost" size="lg">Book a Class</Button>
+    </div>
+  </div>
+</section>

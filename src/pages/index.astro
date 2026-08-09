@@ -1,14 +1,53 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Hero from '@/components/Hero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Card from '@/components/ui/Card.astro';
+import Button from '@/components/ui/Button.astro';
+
+const highlights = [
+  {
+    title: 'Hatha Yoga',
+    body: 'Daily classical Sivananda classes for every level, in person and online.',
+    href: '/schedule',
+  },
+  {
+    title: 'New to Yoga',
+    body: 'Step-by-step introductory courses in postures, breathing and relaxation.',
+    href: '/new-to-yoga',
+  },
+  {
+    title: 'Workshops & Events',
+    body: 'Meditation, kirtan, chair yoga and seasonal gatherings throughout the year.',
+    href: '/events',
+  },
+];
 ---
 
 <Layout>
-  <main
-    class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-4 p-8 text-center"
-  >
-    <h1 class="text-4xl font-semibold text-primary">Toronto Sivananda Yoga Vedanta Centre</h1>
-    <p class="text-muted-foreground">
-      Site rebuild in progress. See <code>BACKLOG.md</code> for the plan.
-    </p>
+  <Header />
+  <main>
+    <Hero />
+
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          highlights.map((h) => (
+            <Card class="flex flex-col p-6">
+              <h3 class="text-2xl text-foreground">{h.title}</h3>
+              <p class="mt-2 flex-1 text-muted-foreground">{h.body}</p>
+              <Button href={h.href} variant="outline" size="sm" class="mt-5 self-start">
+                Learn more
+              </Button>
+            </Card>
+          ))
+        }
+      </div>
+    </section>
+
+    <CtaBand />
   </main>
+  <Footer />
 </Layout>
