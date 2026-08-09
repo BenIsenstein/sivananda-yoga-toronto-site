@@ -23,6 +23,8 @@ epic-by-epic backlog live in **`BACKLOG.md`** — treat it as the source of trut
 5. **Update `BACKLOG.md`** — check off items as they are completed.
 6. **Ask, don't assume.** When a decision is ambiguous, ask targeted questions rather than
    guessing. Prefer objective, honest technical guidance over agreement.
+7. **Keep the theme preview page** (`/theme-preview`). This build goes to the client for
+   review, so the preview must stay available. Do NOT remove it during development.
 
 ## Tech stack & conventions
 

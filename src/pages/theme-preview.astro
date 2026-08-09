@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const swatches = [
+  ['bg-background text-foreground border', 'background'],
+  ['bg-card text-card-foreground border', 'card'],
+  ['bg-primary text-primary-foreground', 'primary'],
+  ['bg-secondary text-secondary-foreground', 'secondary'],
+  ['bg-muted text-muted-foreground', 'muted'],
+  ['bg-accent text-accent-foreground', 'accent'],
+  ['bg-destructive text-destructive-foreground', 'destructive'],
+  ['bg-sidebar text-sidebar-foreground border', 'sidebar'],
+];
+---
+
+<Layout title="Theme Preview — Sivananda Yoga Toronto">
+  <main class="mx-auto max-w-4xl space-y-12 p-8">
+    <header class="space-y-2">
+      <p class="text-sm tracking-widest text-muted-foreground uppercase">Theme preview</p>
+      <h1 class="text-5xl text-primary">Serenity in practice</h1>
+      <p class="max-w-2xl text-lg text-muted-foreground">
+        Warm sand, terracotta and sage — a calm palette for a traditional yoga studio. This page
+        exists to verify Epic 1 theming; it will be removed before launch.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl">Color tokens</h2>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {
+          swatches.map(([cls, name]) => (
+            <div class={`rounded-lg p-6 text-sm font-medium ${cls}`}>{name}</div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl">Typography</h2>
+      <div class="space-y-3 rounded-xl border bg-card p-6">
+        <h3 class="text-3xl">Cormorant Garamond — display serif</h3>
+        <p class="font-sans">
+          Inter — body sans. Yoga can help keep the body fit, the mind balanced and the energy
+          positive. We are grateful to offer daily classes at the centre and online.
+        </p>
+        <p class="text-muted-foreground">Muted body copy for secondary information and captions.</p>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl">Buttons (raw token styling)</h2>
+      <div class="flex flex-wrap gap-3">
+        <button
+          class="rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground transition-colors hover:opacity-90"
+        >
+          Book a class
+        </button>
+        <button
+          class="rounded-md bg-secondary px-5 py-2.5 font-medium text-secondary-foreground transition-colors hover:opacity-90"
+        >
+          Our schedule
+        </button>
+        <button
+          class="rounded-md border border-border px-5 py-2.5 font-medium transition-colors hover:bg-muted"
+        >
+          Learn more
+        </button>
+      </div>
+    </section>
+  </main>
+</Layout>

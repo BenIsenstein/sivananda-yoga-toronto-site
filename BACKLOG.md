@@ -68,13 +68,14 @@ duplicate `classes` / `yoga-camp`, dead 2019 blog posts.
 - [x] Baseline `global.css` with shadcn token layer + warm palette
 - [x] Base `Layout.astro`, placeholder home
 - [x] Write this `BACKLOG.md`
-- [ ] Create public GitHub repo + initial commit (**after review**)
+- [x] Create public GitHub repo + initial commit
 
 ### Epic 1 — Theming (shadcn tokens)
 
-- [ ] Finalize warm/serene palette (OKLCH) via tweakcn; light + dark
-- [ ] Typography scale + serene serif/sans pairing
-- [ ] `tw-animate-css` subtle motion utilities
+- [x] Finalize warm/serene palette (OKLCH); light + dark; full token set (muted, accent, ring, chart, sidebar)
+- [x] Typography: serif display (Cormorant Garamond) + sans body (Inter), self-hosted via Fontsource
+- [x] Base element styles + reduced-motion handling; `tw-animate-css` retained (current shadcn-recommended successor)
+- [x] Theme preview page (`/theme-preview`) to verify tokens — **kept for client review**
 
 ### Epic 2 — Core UI components (native `.astro`)
 
