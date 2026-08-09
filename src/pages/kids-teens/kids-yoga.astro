@@ -1,0 +1,36 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=19772532';
+---
+
+<PageLayout
+  title="Kids Yoga"
+  lead="Playful, story-filled yoga that helps children build healthy body-and-mind habits."
+  description="Kids yoga classes at the Toronto Sivananda Yoga Vedanta Centre — ages 5 to 12."
+  narrow
+>
+  <Prose>
+    <h2>Yoga for Little Kids — Ages 5 to 7</h2>
+    <p>
+      In these classes, yoga is interwoven with stories, songs and movement play. Young kids become
+      lions, butterflies and snakes as they learn simple yoga postures and relaxation techniques.
+      Lots of fun!
+    </p>
+
+    <h2>Yoga for Kids — Ages 9 to 12</h2>
+    <p>
+      In this course children learn breathing practices, relaxation and yoga postures. This
+      foundation helps them build useful skills for maintaining their physical and mental
+      well-being, and a good base for future yoga practice. The course is taught through games and
+      age-appropriate discussions.
+    </p>
+    <p>Course dates are announced through the year — please check upcoming events or contact us.</p>
+  </Prose>
+
+  <div class="mt-8">
+    <Button href={registerUrl} external>Register</Button>
+  </div>
+</PageLayout>

@@ -1,0 +1,113 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Accordion from '@/components/ui/Accordion.astro';
+import AccordionItem from '@/components/ui/AccordionItem.astro';
+
+/* Grouped FAQ, verbatim from the live site. Legacy links re-pointed to new routes. */
+const groups = [
+  {
+    heading: 'Where to Start / About Our Classes',
+    items: [
+      {
+        id: 'start',
+        q: "I've never done yoga before. Where do I start?",
+        a: 'We love teaching beginners and seeing them grow in their practice. Please review our <a href="/new-to-yoga">New to Yoga</a> page for our recommendations on starting yoga.',
+      },
+      {
+        id: 'kind',
+        q: 'What kind of yoga do you teach?',
+        a: 'We teach an exact and easy-to-learn system of traditional Hatha Yoga and Vedanta (philosophy) that supports you in an ongoing practice for continued physical, mental and spiritual growth. Learn more about <a href="/about">our teachers and teachings</a>.',
+      },
+      {
+        id: 'beginner-required',
+        q: 'Do I have to take the Beginner Yoga Courses before attending the open, drop-in classes?',
+        a: 'While we recommend it, it is not required. Often students attend open classes for a while, then later decide to take the <a href="/new-to-yoga">beginner yoga courses</a> in order to study the practice in more detail.',
+      },
+      {
+        id: 'injury',
+        q: 'I have a wrist/shoulder/back/etc. injury. Is it OK to take a yoga class?',
+        a: 'It depends — yoga can help with the healing process. Please let the teacher know before class of any concerns you have so that they can offer modifications. If any posture is not feeling right for your body, it is OK to ease off, skip it, or ask the teacher for help.',
+      },
+    ],
+  },
+  {
+    heading: 'What to Bring / Facilities',
+    items: [
+      {
+        id: 'wear',
+        q: 'What should I wear?',
+        a: 'We recommend loose clothes that you feel comfortable exercising in — a t-shirt and cotton pants, track pants or leggings are great. Note that we practice barefoot (for safety, this prevents slipping on your mat).',
+      },
+      {
+        id: 'mat',
+        q: 'Do I need to bring my own yoga mat?',
+        a: 'No. We provide yoga mats that you can use, free of charge. You are welcome to bring your own if you wish.',
+      },
+      {
+        id: 'facilities',
+        q: 'Do you have change rooms, mat storage or shower facilities?',
+        a: 'We have change rooms. Sorry, we do not have space for mat storage, and we do not have shower facilities. You are welcome to use our yoga mats free of charge.',
+      },
+    ],
+  },
+  {
+    heading: 'Prices',
+    items: [
+      {
+        id: 'cost',
+        q: 'What is the cost of your yoga classes?',
+        a: 'As part of a non-profit organization, we keep prices to a minimum. Please see our <a href="/schedule">class passes</a> for details. Our proceeds go toward running the Centre and offering a variety of <a href="/about/community-outreach">community outreach programs</a>. As a registered charity, we ensure that no one is turned away due to a lack of funds — if you have difficulty paying, please get in touch.',
+      },
+    ],
+  },
+  {
+    heading: 'Location / Parking',
+    items: [
+      {
+        id: 'located',
+        q: 'Where are you located?',
+        a: 'We are at 77 Harbord Street, Toronto, M5S 1G4 — a couple of blocks south of where Spadina and Bloor intersect, across from the University of Toronto, St. George campus. See our <a href="/contact">contact page</a> for a map and directions.',
+      },
+      {
+        id: 'ttc',
+        q: 'Are you near a TTC subway or streetcar?',
+        a: 'We are about two blocks south of Spadina subway station. The 510 streetcar along Spadina stops at Harbord Street; we are a few buildings along Harbord where it crosses Spadina.',
+      },
+      {
+        id: 'parking',
+        q: 'Where can I park my car?',
+        a: 'There are Green P parking spots along Harbord Street and Spadina Street. Tip: spots on Harbord are less expensive than on Spadina.',
+      },
+      {
+        id: 'bike',
+        q: 'Is there a place to store my bicycle?',
+        a: 'There is a post in front of the Centre where you can lock up your bicycle during class.',
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="Frequently Asked Questions"
+  lead="Questions new students often ask. If yours isn't answered here, please contact us."
+  description="Common questions about classes, what to bring, prices, location and parking."
+  narrow
+>
+  <div class="space-y-10">
+    {
+      groups.map((group) => (
+        <section>
+          <h2 class="mb-4 font-serif text-2xl text-foreground">{group.heading}</h2>
+          <Accordion>
+            {group.items.map((item) => (
+              <AccordionItem title={item.q} id={item.id}>
+                <p set:html={item.a} />
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+      ))
+    }
+  </div>
+</PageLayout>

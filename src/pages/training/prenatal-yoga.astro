@@ -1,0 +1,54 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18746538';
+---
+
+<PageLayout
+  title="Prenatal Yoga Teacher Training"
+  lead="Learn to adapt yoga safely for each stage of pregnancy — Yoga Alliance continuing education."
+  description="Prenatal Yoga Teacher Training (online) at the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <Prose>
+    <p>
+      Adapted yoga poses can physically and mentally help prepare women for childbirth. This course
+      teaches you how to adapt a yoga practice to each stage of pregnancy, to ensure a safe and
+      enriching practice for mother and baby. It counts as a 15-hour Continuing Education
+      Certificate with Yoga Alliance.
+    </p>
+    <p>
+      You will learn about the benefits of yoga in pregnancy and how to modify asanas for the
+      changing body. We introduce special poses, breathing exercises and relaxation techniques to
+      help prepare women for a smooth delivery, and explore how meditation and relaxation practices
+      can help parents welcome their new children. The emphasis is on building a safe and supportive
+      environment in the classroom and supporting students emotionally through their pregnancy
+      journey.
+    </p>
+
+    <h2>In this course you will learn</h2>
+    <ul>
+      <li>The benefits of yoga during pregnancy.</li>
+      <li>How to adapt basic asanas.</li>
+      <li>Special poses, breathing exercises and relaxation techniques.</li>
+      <li>How to create a safe and supportive environment for your students.</li>
+    </ul>
+    <p>
+      Based on the teachings of the Sivananda Yoga Vedanta Organization, but open to yoga teachers
+      of all traditions. Course dates are announced through the year — please check upcoming events
+      or contact us.
+    </p>
+
+    <h2>Your teacher</h2>
+    <p>
+      <strong>Sarada</strong> has been part of the Sivananda organization as a karma yogi and teacher
+      for over 20 years, in South America, Canada and Europe. A kind and compassionate teacher, she offers
+      her vast knowledge of yoga to a wide variety of students, and also teaches classes for kids and
+      teens with special needs.
+    </p>
+  </Prose>
+
+  <div class="mt-8"><Button href={registerUrl} external>Register</Button></div>
+</PageLayout>

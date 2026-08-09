@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+export async function getStaticPaths() {
+  const policies = await getCollection('policies');
+  return policies.map((policy) => ({
+    params: { slug: policy.id },
+    props: { policy },
+  }));
+}
+
+const { policy } = Astro.props;
+const { Content } = await render(policy);
+---
+
+<PageLayout
+  title={policy.data.title}
+  description={`${policy.data.title} — Toronto Sivananda Yoga Vedanta Centre.`}
+  narrow
+>
+  <Prose>
+    <Content />
+  </Prose>
+  {
+    policy.data.pdfUrl && (
+      <div class="mt-8">
+        <Button href={policy.data.pdfUrl} external>
+          Read the full policy (PDF)
+        </Button>
+      </div>
+    )
+  }
+</PageLayout>

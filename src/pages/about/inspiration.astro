@@ -1,0 +1,56 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Badge from '@/components/ui/Badge.astro';
+
+/* Verbatim article list from the live "Dose of Yoga Inspiration" archive.
+   These are excerpts from the writings of Swami Sivananda & Swami Vishnudevananda. */
+const articles = [
+  { title: 'Japa Meditation – Mantra Yoga', categories: ['Meditation'] },
+  { title: 'Prayer', categories: ['Bhakti Yoga', 'Four Paths of Yoga'] },
+  { title: 'What is Prana?', categories: ['Raja Yoga', 'Pranayama'] },
+  { title: 'Silence', categories: ['Sadhana', 'Inspiration'] },
+  { title: 'Sadhana for the Conquest of Fear', categories: ['Inspiration', 'Sadhana'] },
+  { title: 'OM', categories: ['Bhakti Yoga', 'Inspiration', 'Sadhana'] },
+  { title: 'Svadhyaya – Daily Study of Religious Books', categories: ['Raja Yoga', 'Sadhana'] },
+  { title: 'Durga Puja or Navaratri', categories: ['Bhakti Yoga'] },
+  { title: 'Develop Cosmic Love', categories: ['Bhakti Yoga', 'Karma Yoga', 'Inspiration'] },
+  { title: 'Karma and Reincarnation', categories: ['Karma Yoga'] },
+  { title: 'Prana (Vital Energy)', categories: ['Pranayama', 'Raja Yoga'] },
+  { title: 'What is Yoga?', categories: ['Inspiration', 'Sadhana'] },
+  { title: 'What is Proper Relaxation?', categories: ['Five Points of Yoga'] },
+  { title: 'Surya Namaskar (Sun Salutation)', categories: ['Asana'] },
+  { title: 'The Qualifications for a Yoga Student', categories: ['Sadhana'] },
+  { title: 'Attachment', categories: ['Raja Yoga', 'Sadhana'] },
+];
+---
+
+<PageLayout
+  title="Dose of Yoga Inspiration"
+  lead="Excerpts from the writings of our teachers, Swami Sivananda and Swami Vishnudevananda."
+  description="Inspirational excerpts from the writings of Swami Sivananda and Swami Vishnudevananda."
+  narrow
+>
+  <Prose>
+    <p>
+      The following are excerpts of writings from our teachers, Swami Sivananda and Swami
+      Vishnudevananda. May their words bring inspiration, guidance and hope to you in your yoga
+      sadhana.
+    </p>
+  </Prose>
+
+  <ul class="mt-8 space-y-3">
+    {
+      articles.map((a) => (
+        <li class="rounded-lg border border-border bg-card p-4">
+          <h2 class="font-serif text-xl text-foreground">{a.title}</h2>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {a.categories.map((c) => (
+              <Badge variant="muted">{c}</Badge>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>

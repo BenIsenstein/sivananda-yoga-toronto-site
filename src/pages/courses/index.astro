@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+import Card from '@/components/ui/Card.astro';
+
+const courses = (await getCollection('courses', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<PageLayout
+  title="Courses"
+  lead="Deepen your practice with our courses in meditation, philosophy, Ayurveda, and the Vedic sciences."
+  description="Yoga and meditation courses at the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {
+      courses.map((course) => (
+        <a href={`/courses/${course.id}`} class="group">
+          <Card class="flex h-full flex-col p-6 transition-colors group-hover:border-primary">
+            <h2 class="font-serif text-2xl text-foreground">{course.data.title}</h2>
+            <p class="mt-2 flex-1 text-muted-foreground">{course.data.summary}</p>
+            <span class="mt-4 text-sm font-medium text-primary">Learn more &rarr;</span>
+          </Card>
+        </a>
+      ))
+    }
+  </div>
+</PageLayout>

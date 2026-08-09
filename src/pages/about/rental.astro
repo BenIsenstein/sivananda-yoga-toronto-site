@@ -1,0 +1,39 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Yoga Halls Rental"
+  lead="Rental space for yoga and related classes, courses and events when our own classes are not scheduled."
+  description="Rent our sunlit yoga halls in the Annex for classes, workshops, lectures and gatherings."
+  narrow
+>
+  <Prose>
+    <p>
+      Our centre offers rental space for yoga and related disciplines' classes and courses when our
+      classes are not scheduled.
+    </p>
+    <p>
+      We are located downtown, just across from the University of Toronto athletic centre. Our yoga
+      studio is a converted brick house in the Annex with vintage charm. We have a spacious yoga
+      hall filled with natural light that can accommodate up to 25 people — perfect for yoga classes
+      (up to 12 people), workshops or larger events. We also have a smaller hall, a cozy space for
+      up to 15 people, ideal for intimate gatherings, meditation circles or small group activities.
+    </p>
+    <p>
+      We have plenty of yoga mats and cushions, and if you need to prepare refreshments or serve
+      food, our fully equipped kitchen is available for your use.
+    </p>
+    <p>
+      If you are interested in discussing rental options for your classes, workshops or lectures,
+      please contact us.
+    </p>
+  </Prose>
+
+  <div class="mt-8">
+    <Button href={`mailto:${site.contact.email}`}>Enquire about rentals</Button>
+  </div>
+</PageLayout>

@@ -1,0 +1,49 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18409110';
+---
+
+<PageLayout
+  title="Chair Yoga Teacher Training"
+  lead="Tools to teach chair yoga — helping students build strength, awareness and confidence."
+  description="Chair Yoga Teacher Training at the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <Prose>
+    <p>
+      Our society is ageing, and there are many people unable to practise a standard yoga class.
+      This program offers you the tools to help your students build strength, awareness and
+      confidence, and to increase their well-being both physically and mentally.
+    </p>
+
+    <h2>The program covers</h2>
+    <ul>
+      <li>Teaching a 30–60 minute chair yoga class.</li>
+      <li>Teaching a group living with Alzheimer's and other forms of dementia.</li>
+      <li>Teaching a group with Multiple Sclerosis and other causes of limited mobility.</li>
+      <li>Teaching chair yoga for office workers.</li>
+      <li>Working with other common issues that make a chair necessary.</li>
+      <li>How to set up the class and how to teach from a chair.</li>
+      <li>Anatomy of aging; mental aspects of aging; yoga philosophy and aging.</li>
+      <li>Meditation and mantras.</li>
+      <li>Storytelling and other ways to share yogic philosophy.</li>
+      <li>How to find work as a chair yoga instructor; volunteer opportunities.</li>
+    </ul>
+    <p>
+      <strong>Practicum:</strong> students have the opportunity to practise teaching. Course dates are
+      announced through the year — please check upcoming events or contact us.
+    </p>
+
+    <h2>Your teacher</h2>
+    <p>
+      <strong>Anjaneya (Michael Hutkins)</strong> is a yoga teacher and yoga therapist who has trained
+      in various Sivananda ashrams around the world. He shares yoga classes, trainings, and sees private
+      clients regularly, and believes that everyone can benefit from this beautiful life practice.
+    </p>
+  </Prose>
+
+  <div class="mt-8"><Button href={registerUrl} external>Register</Button></div>
+</PageLayout>

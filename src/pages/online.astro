@@ -1,0 +1,19 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Online Classes"
+  lead="Our online class schedule is coming soon to the new site."
+  description="Online yoga classes with the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <p class="text-muted-foreground">
+    Join us for daily online yoga and meditation. The full online schedule is on its way; you can
+    book an online class now.
+  </p>
+  <div class="mt-6">
+    <Button href={site.external.book} external>Book an online class</Button>
+  </div>
+</PageLayout>

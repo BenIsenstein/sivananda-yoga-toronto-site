@@ -1,0 +1,55 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Card from '@/components/ui/Card.astro';
+import Button from '@/components/ui/Button.astro';
+
+/* Authoritative class-type descriptions from the current class schedule page. */
+const classes = [
+  {
+    name: 'Intermediate',
+    body: 'Classical Sivananda yoga class for those who already have basic knowledge of yoga. Initial relaxation, breathing exercises (Pranayama), Sun Salutations, a series of Hatha Yoga postures (Asanas) and extended final relaxation.',
+  },
+  {
+    name: 'Meditative',
+    body: 'Longer holding of postures and a short meditation practice at the end. The goal is deepening body awareness and the development of concentration.',
+  },
+  {
+    name: 'Basic / Beginner',
+    body: 'Learn and practice elements of the Sivananda yoga class. For students with little or no yoga experience who would like more guidance before joining an intermediate class, but are not able to attend our 5-week beginner course.',
+  },
+  {
+    name: 'Variations',
+    body: 'Variations of the basic postures. The goal is development of mobility, endurance and stimulation of vital energy.',
+  },
+  {
+    name: 'Free Trial',
+    body: 'Recommended if you are new to yoga or to the Sivananda tradition — a welcoming introduction to the practice.',
+  },
+  {
+    name: 'Satsang',
+    body: 'Group meditation, chanting and a short talk. All are welcome.',
+  },
+];
+---
+
+<PageLayout
+  title="Class Descriptions"
+  lead="Our drop-in classes span every level, from your first trial to a deeper, meditative practice."
+  description="Descriptions of the drop-in yoga classes offered at the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <div class="grid gap-6 md:grid-cols-2">
+    {
+      classes.map((c) => (
+        <Card class="p-6">
+          <h2 class="font-serif text-2xl text-foreground">{c.name}</h2>
+          <p class="mt-2 text-muted-foreground">{c.body}</p>
+        </Card>
+      ))
+    }
+  </div>
+
+  <div class="mt-10 flex flex-wrap gap-3">
+    <Button href="/schedule">View schedule</Button>
+    <Button href="/new-to-yoga" variant="outline">New to yoga?</Button>
+  </div>
+</PageLayout>

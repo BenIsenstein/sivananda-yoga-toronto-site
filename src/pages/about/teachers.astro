@@ -1,0 +1,76 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Tabs from '@/components/ui/Tabs.astro';
+import Prose from '@/components/Prose.astro';
+
+const tabs = [
+  { id: 'sivananda', label: 'Swami Sivananda' },
+  { id: 'vishnudevananda', label: 'Swami Vishnudevananda' },
+];
+---
+
+<PageLayout
+  title="Our Teachers"
+  lead="The inspiration and founders of the International Sivananda Yoga Vedanta Centres."
+  description="Swami Sivananda and Swami Vishnudevananda — the lineage behind the Sivananda tradition."
+  narrow
+>
+  <Tabs tabs={tabs}>
+    <Prose slot="sivananda">
+      <p>
+        Swami Sivananda's life was a radiant example of service to humanity, both during his years
+        as a doctor and later as a world-renowned sage and jivanmukta. To serve all, to love all, to
+        mix with all and to see God in all beings were the ideals he taught and lived by. Born on
+        September 8, 1887, to an illustrious family in Tamil Nadu, South India, he displayed
+        spiritual tendencies even as a young boy.
+      </p>
+      <p>
+        Even as a young man, his driving force was the service of humanity, which led him to become
+        a medical doctor. He served the poor in Malaysia for many years, but soon felt that this was
+        not enough. Divinely blessed, he gave up his medical career and took to a life of
+        renunciation.
+      </p>
+      <p>
+        He returned to India and settled in Rishikesh, Himalayas in 1924, where he practiced intense
+        austerities, found his guru, Swami Vishwananda, and was initiated into sannyas. In 1932 he
+        started the Sivananda Ashram; in 1936 the Divine Life Society was born; and the Yoga Vedanta
+        Forest Academy was organised in 1948 — all with the aim of spreading the teachings of yoga
+        and vedanta.
+      </p>
+      <p>
+        Swami Sivananda's teachings crystallised the basic tenets of all religions, combining all
+        yoga paths into one — the Yoga of Synthesis, which he summed up with,
+        <strong>'Serve, Love, Give, Purify, Meditate, Realise'</strong>. He entered mahasamadhi
+        (left his physical body) on July 14, 1963.
+      </p>
+    </Prose>
+
+    <Prose slot="vishnudevananda">
+      <p>
+        A disciple of Swami Sivananda, Swami Vishnudevananda was born in Kerala, south India on
+        December 31, 1927. During his career in the army, he discovered Swami Sivananda's teachings
+        from a leaflet entitled Sadhana Tattwa (Spiritual Instructions) which began 'An ounce of
+        practice is worth tons of theory.'
+      </p>
+      <p>
+        He entered the Sivananda Ashram in Rishikesh in 1947 at the age of twenty, took sannyas
+        (holy orders) and was appointed the first professor of hatha yoga at the Sivananda Yoga
+        Vedanta Forest Academy, where he trained thousands of students, both Indian and western.
+      </p>
+      <p>
+        In 1957 he set out to carry out the instructions of his Master — to spread the teachings of
+        yoga in the West. He established the first Sivananda Yoga Vedanta Centre in Montreal and for
+        the following thirty-seven years worked tirelessly as a dedicated spiritual teacher and
+        peace missionary, travelling the world establishing centres and ashrams. His motto —
+        <strong>'Health is Wealth. Peace of Mind is Happiness. Yoga Shows the Way'</strong> — continues
+        to inspire all who come to learn about yoga at the Sivananda Ashrams and Centres around the world.
+      </p>
+      <p>
+        Recognised as a world authority on hatha and raja yoga, he is author of the bestselling
+        <em>The Complete Illustrated Book of Yoga</em>. He left his body on November 9, 1993, his
+        legacy a worldwide organisation dedicated to propagating the ancient and timeless wisdom of
+        yoga.
+      </p>
+    </Prose>
+  </Tabs>
+</PageLayout>

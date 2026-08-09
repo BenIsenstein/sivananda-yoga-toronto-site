@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses', ({ data }) => !data.draft);
+  return courses.map((course) => ({
+    params: { slug: course.id },
+    props: { course },
+  }));
+}
+
+const { course } = Astro.props;
+const { Content } = await render(course);
+---
+
+<PageLayout
+  title={course.data.title}
+  lead={course.data.summary}
+  description={course.data.summary}
+  narrow
+>
+  <Prose>
+    <Content />
+  </Prose>
+  {
+    course.data.registerUrl && (
+      <div class="mt-8">
+        <Button href={course.data.registerUrl} external>
+          Register
+        </Button>
+      </div>
+    )
+  }
+</PageLayout>

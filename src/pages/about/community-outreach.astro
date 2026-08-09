@@ -1,0 +1,56 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import { site } from '@/config/site';
+
+const fundraising = [
+  'Doctors Without Borders (Project Syria)',
+  'Shanti Girls Gurukulam at Trissur, India, founded by Swami Tattwarupananda',
+  'Christmas drive for Christie Refugee Centre',
+  'Swami Sivananda Rural Hospital, Kadavur, Madurai',
+  'United Nations World Food Programme',
+  'Fort York Food Bank',
+];
+
+const programs = [
+  'Toronto East General Hospital (Outpatient Youth Anxiety Clinic)',
+  'Toronto District School Board (educational partner)',
+  'Sketch — community arts organization for street-involved and homeless youth',
+  'Robertson House — shelter for homeless mothers with children',
+  'Hincks-Dellcrest Centre — residential youth mental health centre',
+  'Kennedy House Youth Centre — youth secure custody facility',
+  'Birchmount Residence — shelter for homeless senior men',
+];
+---
+
+<PageLayout
+  title="Community Outreach"
+  lead="Supporting yoga in Toronto communities."
+  description="Community outreach programs and fundraising efforts of the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <Prose>
+    <p>
+      Swami Vishnudevananda's mission was to spread peace around the world. We are working to
+      integrate Yoga into Toronto communities so that everyone has access to the teachings and tools
+      that promote both inner and outer peace.
+    </p>
+    <p>
+      In addition to raising funds for both local and international causes, we have developed
+      teaching partnerships with numerous community organizations and the Toronto District School
+      Board, allowing us to reach a diverse group of students and increase access.
+    </p>
+    <p>
+      If you are interested in collaborating or supporting any of these programs, please
+      <a href={`mailto:${site.contact.email}`}>contact us directly</a>.
+    </p>
+
+    <h2>Yoga for Fundraising Efforts</h2>
+    <p>We have raised funds for the following projects and organizations:</p>
+    <ul>{fundraising.map((f) => <li>{f}</li>)}</ul>
+
+    <h2>Yoga for Community Outreach Programs</h2>
+    <p>We have conducted tailored yoga and meditation programs at the following sites:</p>
+    <ul>{programs.map((p) => <li>{p}</li>)}</ul>
+  </Prose>
+</PageLayout>

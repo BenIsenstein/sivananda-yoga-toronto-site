@@ -1,0 +1,96 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Tabs from '@/components/ui/Tabs.astro';
+import Prose from '@/components/Prose.astro';
+
+const tabs = [
+  { id: 'five-points', label: '5 Points of Yoga' },
+  { id: 'four-paths', label: '4 Paths of Yoga' },
+  { id: 'sivananda-class', label: 'Sivananda Yoga Class' },
+];
+---
+
+<PageLayout
+  title="What We Teach"
+  lead="A traditional, easy-to-learn system of Hatha Yoga and the philosophy of Vedanta."
+  description="The 5 Points of Yoga, the 4 Paths of Yoga, and the structure of a Sivananda yoga class."
+  narrow
+>
+  <Tabs tabs={tabs}>
+    <Prose slot="five-points">
+      <p>
+        Swami Vishnudevananda synthesized the ancient wisdom of yoga into five basic principles that
+        can easily be incorporated into one's own lifestyle to provide the foundation for healthy
+        living.
+      </p>
+      <ul>
+        <li>
+          <strong>Proper Exercise (Asanas)</strong> — Yoga poses help develop a strong, healthy body by
+          enhancing flexibility and improving circulation.
+        </li>
+        <li>
+          <strong>Proper Breathing (Pranayama)</strong> — Deep, conscious breathing reduces stress and
+          increases vitality and mental clarity.
+        </li>
+        <li>
+          <strong>Proper Relaxation (Savasana)</strong> — Helps keep the body from going into overload
+          mode, easing worry and fatigue.
+        </li>
+        <li>
+          <strong>Proper Diet (Vegetarian)</strong> — Eating simple, healthy and vegetarian foods that
+          are easy to digest has a positive effect on mind, body and the environment.
+        </li>
+        <li>
+          <strong>Positive Thinking (Vedanta) &amp; Meditation (Dhyana)</strong> — The true keys to achieving
+          peace of mind and eliminating negativity in our lives.
+        </li>
+      </ul>
+    </Prose>
+
+    <Prose slot="four-paths">
+      <p>
+        The Four Paths of Yoga all lead to the same place — union with the Divine — but help in
+        getting there by giving options that fit different human temperaments and approaches to
+        life.
+      </p>
+      <ul>
+        <li>
+          <strong>Karma Yoga</strong> (the yoga of action) — teaches us to act without egoistic expectations
+          in all endeavours of daily life.
+        </li>
+        <li>
+          <strong>Bhakti Yoga</strong> (the path of devotion) — for those with an emotional nature who
+          enjoy prayer, worship and chanting (kirtan).
+        </li>
+        <li>
+          <strong>Raja Yoga</strong> (the science of the mind) — a comprehensive journey to understanding
+          our mind and thoughts through mental control.
+        </li>
+        <li>
+          <strong>Jnana Yoga</strong> (the yoga of knowledge) — for those with strong intellectual tendencies,
+          using Vedanta as a vehicle for Self-realization.
+        </li>
+      </ul>
+    </Prose>
+
+    <Prose slot="sivananda-class">
+      <p>
+        A Sivananda yoga class is a traditional class which encourages proper breathing,
+        flexibility, strength and vitality in the body while calming the mind.
+      </p>
+      <p>
+        A typical class includes pranayama (breathing exercises), warm-ups including Sun Salutations
+        (Surya Namaskar), 12 basic asanas (postures) and deep relaxation. The asanas follow an exact
+        order that allows for the systematic movement of every major part of the body in a balanced
+        way, helping to enhance prana (life-force energy) and quiet the mind.
+      </p>
+      <p>
+        <strong>The 12 basic asanas</strong> are much more than just stretching. They open the energy
+        channels, chakras and psychic centres of the body while increasing flexibility of the spine, strengthening
+        bones, and stimulating the circulatory and immune systems. With regular practice one can increase
+        overall physical and mental health and aid in the prevention of diseases such as diabetes, hypertension
+        and arthritis.
+      </p>
+    </Prose>
+  </Tabs>
+</PageLayout>

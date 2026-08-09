@@ -1,0 +1,57 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+
+const packageUrl =
+  'https://app.acuityscheduling.com/catalog.php?owner=21122031&action=addCart&clear=1&id=1908379';
+---
+
+<PageLayout
+  title="New to Yoga"
+  lead="We teach yoga in a precise and simple way. Here's where to begin."
+  description="Introductory yoga courses (Yoga 1 & Yoga 2) for beginners at the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <Prose>
+    <p>
+      Our classes include: breathing exercises (Pranayama); warm-ups (Sun Salutations and Leg
+      Lifts); 12 fundamental yoga postures (Asanas); and relaxation.
+    </p>
+
+    <h2>Yoga 1 — Introduction to Yoga</h2>
+    <p>This course is for you if:</p>
+    <ul>
+      <li>You are new to yoga.</li>
+      <li>You are looking for an authentic, traditional approach to yoga.</li>
+      <li>
+        You want to learn simple tools to increase your health, well-being and sense of calm in
+        everyday life.
+      </li>
+      <li>You want to learn in small groups with experienced teachers.</li>
+      <li>You would like to refresh your practice or learn a different style of yoga.</li>
+    </ul>
+
+    <h2>Yoga 2 — Establish Your Practice</h2>
+    <p>
+      This course focuses on further practice of the basic poses, variations, and practice of
+      Headstand. You will work on deepening your breathing through breathing techniques and a simple
+      meditation technique to quiet the mind. It is also ideal for those returning to the practice
+      after some time, or who just want to review the fundamentals.
+    </p>
+    <p>
+      Following the introductory courses, you will be able to join our
+      <a href="/schedule">daily intermediate classes</a> and practice confidently. Once you learn the
+      simple sequence, you will be able to practice yoga anywhere, anytime. A 2-week pass for drop-in
+      classes is offered to students who complete Yoga 1.
+    </p>
+    <p>
+      Learn more about <a href="/about/what-we-teach">what we teach</a>.
+    </p>
+  </Prose>
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    <Button href={packageUrl} external>Register — 2-level package (10% off)</Button>
+    <Button href="/schedule" variant="outline">View class schedule</Button>
+  </div>
+</PageLayout>

@@ -112,79 +112,81 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 **Setup**
 
-- [ ] Define content collections + schemas (`src/content.config.ts`)
-- [ ] Expand `site.ts` nav (inspiration, full courses, retreats subpages, kids/teens, satsang, fundraiser)
+- [x] Define content collections + schemas (`src/content.config.ts`)
+- [x] Expand `site.ts` nav (inspiration, full courses, retreats subpages, kids/teens, satsang, fundraiser)
 
 **About hub + subpages**
 
-- [ ] `/about` — card directory hub (Teachers, Teachings, Our Centre, New to Yoga, FAQ, Outreach)
-- [ ] `/about/our-centre` — prose + 1959/1962/1992 timeline (hidden TODO) + gallery
-- [ ] `/about/teachers` — Tabs: Swami Sivananda / Swami Vishnudevananda (verbatim)
-- [ ] `/about/what-we-teach` — Tabs: 5 Points / 4 Paths / Sivananda Class
-- [ ] `/about/community-outreach` — prose + verbatim fundraising & program-site lists
-- [ ] `/about/rental` — halls, capacities, kitchen, email CTA
-- [ ] `/about/inspiration` — Dose of Yoga Inspiration
+- [x] `/about` — card directory hub (Teachers, Teachings, Our Centre, New to Yoga, FAQ, Outreach)
+- [x] `/about/our-centre` — prose + 1959/1962/1992 timeline (hidden TODO) + gallery
+- [x] `/about/teachers` — Tabs: Swami Sivananda / Swami Vishnudevananda (verbatim)
+- [x] `/about/what-we-teach` — Tabs: 5 Points / 4 Paths / Sivananda Class
+- [x] `/about/community-outreach` — prose + verbatim fundraising & program-site lists
+- [x] `/about/rental` — halls, capacities, kitchen, email CTA
+- [x] `/about/inspiration` — Dose of Yoga Inspiration
 
 **Get started**
 
-- [ ] `/new-to-yoga` — Yoga 1 & 2, package discount, 2-week pass
+- [x] `/new-to-yoga` — Yoga 1 & 2, package discount, 2-week pass
 
 **Courses**
 
-- [ ] `/courses` — hub (card grid)
-- [ ] `/courses/meditation`
-- [ ] `/courses/private`
-- [ ] `/courses/pranayama`
-- [ ] `/courses/ayurvedic-nutrition`
-- [ ] `/courses/philosophy`
-- [ ] `/courses/vedic-studies`
-- [ ] `/courses/nada-yoga`
+- [x] `/courses` — hub (card grid)
+- [x] `/courses/meditation`
+- [x] `/courses/private`
+- [x] `/courses/pranayama`
+- [x] `/courses/ayurvedic-nutrition`
+- [x] `/courses/philosophy`
+- [x] `/courses/vedic-studies`
+- [x] `/courses/nada-yoga`
 
 **Classes (content only; interactive grid in Epic 4)**
 
-- [ ] `/class-descriptions`
+- [x] `/class-descriptions`
 
 **Retreats & Training**
 
-- [ ] `/retreats/weekend-retreat`
-- [ ] `/training/chair-yoga` (teacher training)
-- [ ] `/training/gentle-yoga` (teacher training)
-- [ ] `/training/prenatal-yoga` (teacher training)
+- [x] `/retreats/weekend-retreat`
+- [x] `/training/chair-yoga` (teacher training)
+- [x] `/training/gentle-yoga` (teacher training)
+- [x] `/training/prenatal-yoga` (teacher training)
 
 **Kids / Teens / Family**
 
-- [ ] `/kids-teens/kids-yoga`
-- [ ] `/kids-teens/teen-yoga`
-- [ ] `/kids-teens/for-parents`
+- [x] `/kids-teens/kids-yoga`
+- [x] `/kids-teens/teen-yoga`
+- [x] `/kids-teens/for-parents`
 
 **Satsang / Spiritual**
 
-- [ ] `/satsang` (free group meditation)
-- [ ] `/satsang/sunday-prayers`
-- [ ] `/satsang/puja`
+- [x] `/satsang` (free group meditation)
+- [x] `/satsang/sunday-prayers`
+- [x] `/satsang/puja`
 
 **Support**
 
-- [ ] `/fundraiser` (Donate remains an external Square link)
+- [x] `/fundraiser` (Donate remains an external Square link)
 
 **Contact & FAQ**
 
-- [ ] `/contact` — address, hours, directions (form deferred to Epic 8)
-- [ ] `/faq` — Accordion; legacy links re-pointed
+- [x] `/contact` — address, hours, directions (form deferred to Epic 8)
+- [x] `/faq` — Accordion; legacy links re-pointed
 
 **Policies (6)**
 
-- [ ] `/policies/terms`
-- [ ] `/policies/refund`
-- [ ] `/policies/privacy`
-- [ ] `/policies/data-privacy`
-- [ ] `/policies/anti-harassment`
-- [ ] `/policies/misconduct` (links existing PDF)
+- [x] `/policies/terms`
+- [x] `/policies/refund`
+- [x] `/policies/privacy`
+- [x] `/policies/data-privacy`
+- [x] `/policies/anti-harassment`
+- [x] `/policies/misconduct` (links existing PDF)
 
 **Wrap-up**
 
-- [ ] Download & optimize images → `astro:assets`
-- [ ] Verify all nav targets resolve (no 404s); light + dark pass
+- [ ] Download & optimize images → `astro:assets` — **deferred**: pages built text-first;
+      confirm with client which live-site images to carry over (many are stale) before adding.
+- [x] Verify all nav targets resolve (no 404s); light + dark pass
+- [x] Added `/schedule`, `/online`, `/events` placeholders (full build in Epic 4/5) so nav is complete
 - [ ] Owner review pass
 
 ### Epic 4 — Schedule & Booking

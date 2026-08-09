@@ -5,12 +5,16 @@
 
 ## ⚠️ Discrepancies / questions for the client
 
-1. **Founding year conflict.** The **About** page says the Centre was
-   "established in **1962**"; the **Our Centre** page says "established in **1992**".
-   The two pages contradict each other. **Do not guess** — confirm the correct year
-   with the client before publishing. (Placeholder: flag in content, leave a TODO.)
+1. **Founding year — RESOLVED as a timeline** (confirm with client): the two pages aren't
+   contradictory once read as a timeline — **1959** International org founded (Our Centre
+   page), **1962** Toronto chapter established (About page), **1992** current 77 Harbord
+   Centre established (Our Centre page). Presented as a timeline on `/about/our-centre`
+   with a hidden `TODO(client)` note.
 2. Several FAQ links point to legacy URLs (`beginners-yoga-courses`, `class-prices`)
-   that map to our new `/new-to-yoga` and `/schedule` (passes) — re-point on migration.
+   that map to our new `/new-to-yoga` and `/schedule` (passes) — re-pointed on migration.
+3. **Transfer fee discrepancy**: the Terms page says a **$10** course-transfer fee; the
+   newer Refund page (2025) says **$20**. Used **$20** (newer) on `/policies/refund` and
+   left the Terms page fee unspecified. Confirm with client.
 
 ## Facts to preserve
 

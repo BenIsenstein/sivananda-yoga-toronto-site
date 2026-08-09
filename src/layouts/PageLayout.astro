@@ -1,0 +1,36 @@
+---
+/**
+ * PageLayout — standard content page shell: Header, page title band, main
+ * content slot, Footer. Light + dark aware. Wraps the base Layout.
+ */
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Optional short intro shown under the page title. */
+  lead?: string;
+  /** Constrain main content width for prose readability. */
+  narrow?: boolean;
+}
+
+const { title, description, lead, narrow = false } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main>
+    <div class="border-b border-border bg-muted/40">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <h1 class="text-4xl text-foreground sm:text-5xl">{title}</h1>
+        {lead && <p class="mt-4 max-w-2xl text-lg text-muted-foreground">{lead}</p>}
+      </div>
+    </div>
+    <div class:list={['mx-auto px-4 py-14 sm:px-6', narrow ? 'max-w-3xl' : 'max-w-6xl']}>
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -29,6 +29,16 @@ export const site = {
     email: 'toronto@sivananda.org',
     mapUrl: 'https://goo.gl/maps/nVnPhLyEiiN2',
   },
+  /** Opening hours, verbatim from the contact page. */
+  hours: [
+    { day: 'Monday', times: '4:30–9 pm' },
+    { day: 'Tuesday', times: '9–11:30 am, 4:30–9 pm' },
+    { day: 'Wednesday', times: '4:30–9 pm' },
+    { day: 'Thursday', times: '9–11:30 am, 4:30–9 pm' },
+    { day: 'Friday', times: '9–11:30 am, 4:30–9 pm' },
+    { day: 'Saturday', times: '9 am–1 pm, 3:30–6 pm' },
+    { day: 'Sunday', times: '3:30–8 pm' },
+  ],
   /** Third-party services (kept as-is per project decisions). */
   external: {
     book: 'https://sivanandacanada.org/toronto/book-a-yoga-class/',
@@ -55,19 +65,32 @@ export const mainNav: NavItem[] = [
       { label: 'Our Centre', href: '/about/our-centre' },
       { label: 'Our Teachers', href: '/about/teachers' },
       { label: 'What We Teach', href: '/about/what-we-teach' },
+      { label: 'Dose of Yoga Inspiration', href: '/about/inspiration' },
       { label: 'Community Outreach', href: '/about/community-outreach' },
       { label: 'Yoga Halls Rental', href: '/about/rental' },
     ],
   },
-  { label: 'Class Schedule', href: '/schedule' },
-  { label: 'Online', href: '/online' },
+  {
+    label: 'Classes',
+    href: '/schedule',
+    children: [
+      { label: 'Class Schedule', href: '/schedule' },
+      { label: 'Online', href: '/online' },
+      { label: 'Class Descriptions', href: '/class-descriptions' },
+      { label: 'New to Yoga', href: '/new-to-yoga' },
+    ],
+  },
   {
     label: 'Courses',
     href: '/courses',
     children: [
-      { label: 'New to Yoga', href: '/new-to-yoga' },
       { label: 'Meditation', href: '/courses/meditation' },
       { label: 'Private Yoga & Meditation', href: '/courses/private' },
+      { label: 'Pranayama', href: '/courses/pranayama' },
+      { label: 'Ayurvedic Nutrition & Cooking', href: '/courses/ayurvedic-nutrition' },
+      { label: 'Philosophy', href: '/courses/philosophy' },
+      { label: 'Vedic Studies', href: '/courses/vedic-studies' },
+      { label: 'Nada Yoga & Mantras', href: '/courses/nada-yoga' },
     ],
   },
   { label: 'Workshops / Events', href: '/events' },
@@ -75,8 +98,25 @@ export const mainNav: NavItem[] = [
     label: 'Retreats & Training',
     children: [
       { label: 'Weekend Yoga Retreat', href: '/retreats/weekend-retreat' },
+      { label: 'Chair Yoga Teacher Training', href: '/training/chair-yoga' },
+      { label: 'Gentle Yoga Teacher Training', href: '/training/gentle-yoga' },
+      { label: 'Prenatal Yoga Teacher Training', href: '/training/prenatal-yoga' },
       { label: 'Sivananda Ashram Yoga Camp', href: site.external.ashramCamp, external: true },
-      { label: 'Teacher Training', href: site.external.teacherTraining, external: true },
+      { label: 'Teacher Training (TTC)', href: site.external.teacherTraining, external: true },
+    ],
+  },
+  {
+    label: 'Community',
+    children: [
+      { label: 'Kids Yoga', href: '/kids-teens/kids-yoga' },
+      { label: 'Teen Yoga', href: '/kids-teens/teen-yoga' },
+      { label: 'For Parents', href: '/kids-teens/for-parents' },
+      { label: 'Satsang', href: '/satsang' },
+      { label: 'Sunday Prayers', href: '/satsang/sunday-prayers' },
+      { label: 'Puja', href: '/satsang/puja' },
+      { label: 'Fundraiser', href: '/fundraiser' },
+      { label: 'FAQ', href: '/faq' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
 ];
@@ -86,5 +126,7 @@ export const policyNav: NavChild[] = [
   { label: 'Terms & Conditions', href: '/policies/terms' },
   { label: 'Refund Policy', href: '/policies/refund' },
   { label: 'Privacy Policy', href: '/policies/privacy' },
+  { label: 'Data Privacy Policy', href: '/policies/data-privacy' },
+  { label: 'Anti-Harassment Policy', href: '/policies/anti-harassment' },
   { label: 'Misconduct Policy', href: '/policies/misconduct' },
 ];

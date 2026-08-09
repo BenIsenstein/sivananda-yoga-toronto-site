@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+
+const policies = (await getCollection('policies')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout
+  title="Policies"
+  lead="Our registration, refund, privacy and conduct policies."
+  description="Policies of the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <ul class="divide-y divide-border rounded-xl border border-border">
+    {
+      policies.map((policy) => (
+        <li>
+          <a
+            href={`/policies/${policy.id}`}
+            class="flex items-center justify-between px-5 py-4 transition-colors hover:bg-muted"
+          >
+            <span class="font-serif text-lg text-foreground">{policy.data.title}</span>
+            <span class="text-primary" aria-hidden="true">
+              &rarr;
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</PageLayout>

@@ -1,0 +1,70 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+
+{
+  /* TODO(client): confirm founding timeline — 1959 (org) / 1962 (Toronto chapter) / 1992 (current Centre). Synthesized from two source pages (About says 1962; Our Centre says 1992; org founded 1959). */
+}
+
+const timeline = [
+  {
+    year: '1959',
+    text: 'The International Sivananda Yoga Vedanta Centres — a non-profit organization named after Swami Sivananda — is founded by his disciple Swami Vishnudevananda.',
+  },
+  {
+    year: '1962',
+    text: 'The Sivananda tradition takes root in Toronto.',
+  },
+  {
+    year: '1992',
+    text: 'Our current Centre at 77 Harbord Street is established in the Annex, near Bloor & Spadina.',
+  },
+];
+---
+
+<PageLayout
+  title="Our Centre"
+  lead="Teaching yoga and Vedanta in Toronto's Annex neighbourhood."
+  description="The Toronto Sivananda Yoga Vedanta Centre — our mission, history and tradition."
+  narrow
+>
+  <Prose>
+    <p>
+      Our mission is to support our students in their physical, mental and spiritual growth by
+      teaching Yoga and Vedanta. All are welcome to visit the Centre to learn not only how yoga can
+      help maintain a healthy body, but also how yogic philosophy, applied in daily life, can help
+      maintain a peaceful mind.
+    </p>
+    <p>
+      The Centre is part of <a
+        href="https://www.sivananda.org/"
+        target="_blank"
+        rel="noopener noreferrer">The International Sivananda Yoga Vedanta Centres</a
+      >, a non-profit organization named after Swami Sivananda, one of the most influential
+      spiritual teachers of the 20th century, and founded in 1959 by his disciple Swami
+      Vishnudevananda.
+    </p>
+    <p>
+      The Sivananda Yoga Vedanta Centres &amp; Ashrams are recognized worldwide for teaching yoga
+      authentically, preserving its purity and tradition dating back several thousand years.
+    </p>
+  </Prose>
+
+  <section class="mt-12" aria-label="Our history">
+    <h2 class="font-serif text-3xl text-foreground">Our History</h2>
+    <ol class="mt-6 space-y-6 border-l border-border pl-6">
+      {
+        timeline.map((item) => (
+          <li class="relative">
+            <span
+              class="absolute -left-[1.65rem] top-1.5 size-3 rounded-full bg-primary"
+              aria-hidden="true"
+            />
+            <div class="font-serif text-2xl text-primary">{item.year}</div>
+            <p class="mt-1 text-muted-foreground">{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</PageLayout>

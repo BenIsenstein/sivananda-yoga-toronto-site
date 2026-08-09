@@ -1,0 +1,57 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Card from '@/components/ui/Card.astro';
+
+const cards = [
+  {
+    title: 'Our Teachers',
+    body: 'We follow the teachings of Swami Sivananda and Swami Vishnudevananda, the inspiration and founders of the International Sivananda Yoga Vedanta Centres.',
+    href: '/about/teachers',
+  },
+  {
+    title: 'Our Teachings',
+    body: 'A traditional, exact and easy-to-learn system that creates a healthy body and mind, leading to spiritual growth.',
+    href: '/about/what-we-teach',
+  },
+  {
+    title: 'Our Centre',
+    body: "Located in Toronto's Annex neighbourhood, near Bloor & Spadina, and part of the International Sivananda Yoga Vedanta Centres, a non-profit organization.",
+    href: '/about/our-centre',
+  },
+  {
+    title: 'New to Yoga?',
+    body: 'Starting yoga can feel overwhelming — but it need not be. See our recommendations for where to begin.',
+    href: '/new-to-yoga',
+  },
+  {
+    title: 'Common Questions',
+    body: 'Questions new students often ask — about parking, yoga mats, what to wear, and more.',
+    href: '/faq',
+  },
+  {
+    title: 'Community Outreach',
+    body: 'Your participation at our Centre helps support a wide range of community outreach programs.',
+    href: '/about/community-outreach',
+  },
+];
+---
+
+<PageLayout
+  title="About Us"
+  lead="Learn about our teachers, our teachings, our Centre and how to begin."
+  description="About the Toronto Sivananda Yoga Vedanta Centre — our teachers, teachings, centre and community."
+>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {
+      cards.map((c) => (
+        <a href={c.href} class="group">
+          <Card class="flex h-full flex-col p-6 transition-colors group-hover:border-primary">
+            <h2 class="font-serif text-2xl text-foreground">{c.title}</h2>
+            <p class="mt-2 flex-1 text-muted-foreground">{c.body}</p>
+            <span class="mt-4 text-sm font-medium text-primary">Read more &rarr;</span>
+          </Card>
+        </a>
+      ))
+    }
+  </div>
+</PageLayout>

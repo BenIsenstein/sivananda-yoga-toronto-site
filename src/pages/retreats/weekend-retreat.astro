@@ -1,0 +1,108 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Card from '@/components/ui/Card.astro';
+import Button from '@/components/ui/Button.astro';
+
+const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=55564857';
+
+const schedule = [
+  {
+    day: 'Friday',
+    items: ['8:00 pm — Satsang* (no food served; please have dinner before you arrive)'],
+  },
+  {
+    day: 'Saturday',
+    items: [
+      '5:30 am — Wake-up',
+      '6:00 am — Satsang*',
+      '8:00 am — Yoga Asana Class',
+      '10:00 am — Brunch',
+      '11:00–12:00 — Free Time',
+      '12:00–2:00 pm — Lecture / Workshop',
+      '4:00 pm — Yoga Class',
+      '6:00 pm — Dinner',
+      '8:00 pm — Satsang*',
+    ],
+  },
+  {
+    day: 'Sunday',
+    items: [
+      '5:30 am — Wake-up',
+      '6:00 am — Satsang*',
+      '8:00 am — Yoga Class',
+      '10:00 am — Brunch',
+      '11:00–12:00 — Free Time',
+      '12:00–2:00 pm — Lecture / Workshop',
+      'Departure after the workshop',
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="Weekend Yoga Retreat"
+  lead="Experience the harmony, peace and balance of yoga at the Mansfield Outdoor Centre, north of Toronto."
+  description="A weekend yoga retreat at the Mansfield Outdoor Centre near Barrie, Ontario — all levels welcome."
+  narrow
+>
+  <Prose>
+    <p>
+      Our weekend retreat is held at the Mansfield Outdoor Centre, near Barrie, about 1½ hours north
+      of Toronto. Join us to experience the harmony, peace and balance that yoga brings, in a
+      setting that invigorates the body and calms the mind. No previous yoga experience is required
+      — everyone is welcome. The Centre will organize a carpool. Accommodation is at the main Field
+      Centre, in rooms with four beds; cabins with ensuite bathrooms can be booked directly with the
+      Mansfield Outdoor Centre.
+    </p>
+
+    <h2>Program options</h2>
+    <ul>
+      <li><strong>Day program</strong> (Saturday) — $100</li>
+      <li><strong>Weekend program</strong> (without accommodation) — $200</li>
+      <li><strong>Full weekend program</strong> — $325 ($100 non-refundable deposit)</li>
+    </ul>
+    <p>Dates are announced through the year — please check upcoming events or contact us.</p>
+  </Prose>
+
+  <section class="mt-10">
+    <h2 class="font-serif text-2xl text-foreground">Sample schedule</h2>
+    <div class="mt-4 grid gap-4 md:grid-cols-3">
+      {
+        schedule.map((day) => (
+          <Card class="p-5">
+            <h3 class="font-serif text-xl text-primary">{day.day}</h3>
+            <ul class="mt-3 space-y-1.5 text-sm text-muted-foreground">
+              {day.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </Card>
+        ))
+      }
+    </div>
+    <p class="mt-3 text-sm text-muted-foreground">
+      *Satsang: group meditation, chanting, lecture and prayers.
+    </p>
+  </section>
+
+  <Prose class="mt-10">
+    <h2>What to bring</h2>
+    <p>
+      Please bring your own yoga mat and meditation cushion, towels, pillow and sleeping bag or
+      blankets (linens are not provided). We also recommend a shawl or blanket for meditation, a
+      flashlight, casual and warm clothes, and shoes or boots for hiking.
+    </p>
+
+    <h2>Meditative Yoga Retreat at the Centre</h2>
+    <p>
+      We also offer a Meditative Yoga Retreat at the Sivananda Yoga Centre — a full day to
+      experience the benefits of meditation, with individual guidance, a gentle yoga class, and time
+      to rest and connect with other students. All levels are welcome.
+    </p>
+  </Prose>
+
+  <div class="mt-8">
+    <Button href={registerUrl} external>Register</Button>
+  </div>
+</PageLayout>

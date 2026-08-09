@@ -1,0 +1,48 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Support Our Centre"
+  lead="As a registered charity and non-profit, your support helps us keep yoga accessible to all."
+  description="Support the Toronto Sivananda Yoga Vedanta Centre through donations, connections and volunteering."
+  narrow
+>
+  <Prose>
+    <p>
+      The Sivananda Yoga Centre is a registered charity and part of a non-profit organization. Your
+      support is crucial in helping us sustain our operations, meet our financial obligations, and
+      continue offering accessible yoga and a wide range of
+      <a href="/about/community-outreach">community outreach programs</a>.
+    </p>
+
+    <h2>Here's how you can contribute</h2>
+    <ul>
+      <li>
+        <strong>Donate generously.</strong> Make a donation online, or by e-transfer to
+        <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. Donations are
+        tax-deductible, and a charitable donation receipt will be issued.
+      </li>
+      <li>
+        <strong>Forge connections.</strong> Help us connect with individuals, corporations, businesses,
+        organizations and foundations that can provide assistance. If your employer has a giving policy,
+        please consider requesting a donation — many businesses will match their employees' donations.
+      </li>
+      <li>
+        <strong>Volunteer your time.</strong> Offer your time and talents to amplify our efforts.
+      </li>
+      <li><strong>Participate.</strong> Join our fundraising events throughout the year.</li>
+    </ul>
+    <p>
+      Every contribution is immensely appreciated. Thank you for your support and belief in the
+      power of yoga to uplift and unite.
+    </p>
+  </Prose>
+
+  <div class="mt-8">
+    <Button href={site.external.donate} external>Make a donation</Button>
+  </div>
+</PageLayout>

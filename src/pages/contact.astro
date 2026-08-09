@@ -1,0 +1,79 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Card from '@/components/ui/Card.astro';
+import Prose from '@/components/Prose.astro';
+import { site } from '@/config/site';
+
+const { contact, hours } = site;
+---
+
+<PageLayout
+  title="Contact"
+  lead="We're in the Annex, a couple of blocks south of Spadina & Bloor, across from the University of Toronto."
+  description="Visit the Toronto Sivananda Yoga Vedanta Centre at 77 Harbord Street — address, hours and directions."
+>
+  <div class="grid gap-6 md:grid-cols-2">
+    <Card class="p-6">
+      <h2 class="font-serif text-2xl text-foreground">Address</h2>
+      <address class="mt-3 text-muted-foreground not-italic leading-relaxed">
+        {contact.address}<br />
+        {contact.city}
+        {contact.region}
+        {contact.postalCode}<br />
+        Tel: <a href={contact.phoneHref} class="text-primary hover:opacity-80">{contact.phone}</a
+        ><br />
+        <a href={`mailto:${contact.email}`} class="text-primary hover:opacity-80">{contact.email}</a
+        ><br />
+        <a
+          href={contact.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary hover:opacity-80">Google Map</a
+        >
+      </address>
+    </Card>
+
+    <Card class="p-6">
+      <h2 class="font-serif text-2xl text-foreground">Hours</h2>
+      <dl class="mt-3 space-y-1 text-sm">
+        {
+          hours.map((h) => (
+            <div class="flex justify-between gap-4 border-b border-border py-1.5 last:border-0">
+              <dt class="font-medium text-foreground">{h.day}</dt>
+              <dd class="text-muted-foreground">{h.times}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-3 text-sm text-muted-foreground">
+        If you need to visit us outside these hours, please contact us.
+      </p>
+    </Card>
+  </div>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    <Prose>
+      <h2>Coming by subway / streetcar?</h2>
+      <ul>
+        <li>Get off at Spadina subway station.</li>
+        <li>Take the 510 streetcar two stops south to Harbord Street.</li>
+        <li>Walk west on Harbord Street.</li>
+      </ul>
+    </Prose>
+    <Prose>
+      <h2>Coming by car?</h2>
+      <p>
+        <strong>From the west end</strong> (Etobicoke, Burlington, Mississauga, Oakville): take the Gardiner
+        Expressway to Spadina Avenue, then make a left on Harbord Street (between College Street and Bloor
+        Street).
+      </p>
+      <p>
+        <strong>From the east end</strong> (Scarborough): take the Don Valley Parkway north to the Bloor/Bayview
+        exit, continue on Bloor Street to Spadina Avenue, make a left on Spadina Avenue and turn right
+        onto Harbord Street.
+      </p>
+    </Prose>
+  </div>
+
+  {/* TODO(Epic 8): add contact form (replaces the legacy Caldera form). */}
+</PageLayout>

@@ -1,0 +1,40 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Satsang — Free Group Meditation"
+  lead="Satsang means 'association with the wise' — the heart of yoga practice."
+  description="Free weekly satsang (group meditation, chanting and a short talk) at the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
+>
+  <Prose>
+    <p>
+      Satsang means 'association with the wise'. It is the heart of yoga practice. Meditating
+      together in a group creates a strong spiritual atmosphere which allows a deeper experience of
+      meditation. In Satsang, people of different levels practice together — from newcomers to
+      experienced yoga teachers.
+    </p>
+    <p>Satsang consists of:</p>
+    <ul>
+      <li>30 minutes of silent group meditation.</li>
+      <li>30 minutes of meditative chanting of mantras and kirtan.</li>
+      <li>An easy-to-follow lecture on yoga philosophy or psychology.</li>
+    </ul>
+    <p>
+      <strong>Sunday evenings, 6:30–8:00 pm. Free of charge.</strong> Donations of flowers or sweets are
+      very welcome but completely optional. No prior experience required — all are welcome.
+    </p>
+    <p>
+      From time to time we are blessed to have guest speakers, musicians and special events at our
+      satsangs, including pujas for festivals such as Navaratri, the Divine Mother Festival.
+    </p>
+    <p>
+      Please e-mail us at
+      <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+      or call {site.contact.phone} to let us know you're coming.
+    </p>
+  </Prose>
+</PageLayout>

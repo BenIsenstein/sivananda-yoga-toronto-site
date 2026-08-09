@@ -1,0 +1,20 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Class Schedule"
+  lead="Our weekly in-person class schedule is coming soon to the new site."
+  description="Weekly yoga class schedule at the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <p class="text-muted-foreground">
+    We're building the new interactive schedule. In the meantime, you can view the current schedule
+    and book a class directly.
+  </p>
+  <div class="mt-6 flex flex-wrap gap-3">
+    <Button href={site.external.book} external>Book a class</Button>
+    <Button href="/class-descriptions" variant="outline">Class descriptions</Button>
+  </div>
+</PageLayout>
