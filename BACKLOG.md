@@ -193,9 +193,10 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 4 — Schedule & Booking
 
-- [ ] `schedule.yaml` (day/time/class-type/Acuity link) → responsive grid component
-- [ ] Class-descriptions section + passes/gift-cards page (Acuity catalog + Square)
-- [ ] `/book` (Acuity iframe `owner=21122031`), `/online`
+- [x] `schedule-in-person.yaml` + `schedule-online.yaml` (day/time/class-type/Acuity link),
+      Zod-validated loader → responsive `ScheduleGrid` (desktop table + mobile day list)
+- [x] Class-descriptions legend + `/passes` page (Acuity catalog passes + Square/Acuity gift cards)
+- [x] `/book` (Acuity iframe `owner=21122031`) — nav/hero now point to local `/book`; `/online` schedule
 
 ### Epic 5 — Events (Model B)
 

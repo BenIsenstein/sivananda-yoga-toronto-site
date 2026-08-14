@@ -1,0 +1,26 @@
+---
+/** ClassTypeLegend — descriptions for the class types present in a schedule. */
+import { classTypeDescriptions } from '@/data/schedule-meta';
+import type { ScheduleClass } from '@/data/schedule-meta';
+
+interface Props {
+  classes: ScheduleClass[];
+}
+
+const { classes } = Astro.props;
+// Only show descriptions for class types actually in this schedule (skip "Other").
+const present = Array.from(new Set(classes.map((c) => c.classType))).filter(
+  (t) => t !== 'Other' && classTypeDescriptions[t]
+);
+---
+
+<dl class="grid gap-4 sm:grid-cols-2">
+  {
+    present.map((type) => (
+      <div class="rounded-lg border border-border bg-card p-4">
+        <dt class="font-serif text-lg text-foreground">{type}</dt>
+        <dd class="mt-1 text-sm text-muted-foreground">{classTypeDescriptions[type]}</dd>
+      </div>
+    ))
+  }
+</dl>

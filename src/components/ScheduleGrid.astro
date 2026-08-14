@@ -1,0 +1,128 @@
+---
+/**
+ * ScheduleGrid — responsive weekly class grid. Light + dark aware.
+ * Desktop: time-rows × day-columns table. Mobile: grouped by day.
+ * Each class links to its Acuity page.
+ */
+import { DAYS, type ScheduleClass } from '@/data/schedule-meta';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  classes: ScheduleClass[];
+  class?: string;
+}
+
+const { classes, class: className } = Astro.props;
+
+// Unique time rows (by start–end), sorted by start time.
+const rowKeys = Array.from(new Set(classes.map((c) => `${c.start}|${c.end}|${c.timeLabel}`))).sort(
+  (a, b) => a.localeCompare(b)
+);
+const rows = rowKeys.map((k) => {
+  const [start, end, timeLabel] = k.split('|');
+  return { start, end, timeLabel };
+});
+
+function cellClasses(day: string, start: string, end: string): ScheduleClass[] {
+  return classes.filter((c) => c.day === day && c.start === start && c.end === end);
+}
+
+// Days that actually have any classes (drop empty columns).
+const activeDays = DAYS.filter((d) => classes.some((c) => c.day === d));
+
+// Group by day for the mobile view.
+const byDay = activeDays.map((day) => ({
+  day,
+  items: classes.filter((c) => c.day === day),
+}));
+
+const cellLink =
+  'block rounded-md bg-primary/10 px-2 py-1.5 text-center text-sm font-medium text-foreground transition-colors hover:bg-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring';
+const cellStatic = 'block px-2 py-1.5 text-center text-sm text-muted-foreground';
+---
+
+<div class={cn('w-full', className)}>
+  {/* Desktop / tablet grid */}
+  <div class="hidden overflow-x-auto md:block">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr>
+          <th class="border border-border bg-muted p-2 text-left font-medium text-muted-foreground"
+            >Time</th
+          >
+          {
+            activeDays.map((day) => (
+              <th class="border border-border bg-muted p-2 font-medium text-foreground">{day}</th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr>
+              <th
+                scope="row"
+                class="border border-border bg-muted/50 p-2 text-left font-medium whitespace-nowrap text-muted-foreground"
+              >
+                {row.timeLabel}
+              </th>
+              {activeDays.map((day) => {
+                const items = cellClasses(day, row.start, row.end);
+                return (
+                  <td class="border border-border p-1.5 align-middle">
+                    {items.map((c) =>
+                      c.acuity ? (
+                        <a
+                          href={c.acuity}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class={cellLink}
+                        >
+                          {c.label}
+                        </a>
+                      ) : (
+                        <span class={cellStatic}>{c.label}</span>
+                      )
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  {/* Mobile: grouped by day */}
+  <div class="space-y-6 md:hidden">
+    {
+      byDay.map(({ day, items }) => (
+        <div>
+          <h3 class="mb-2 font-serif text-xl text-foreground">{day}</h3>
+          <ul class="divide-y divide-border rounded-lg border border-border">
+            {items.map((c) => (
+              <li class="flex items-center justify-between gap-3 p-3">
+                <div>
+                  <div class="font-medium text-foreground">{c.label}</div>
+                  <div class="text-sm text-muted-foreground">{c.timeLabel}</div>
+                </div>
+                {c.acuity && (
+                  <a
+                    href={c.acuity}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shrink-0 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90"
+                  >
+                    Book
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</div>

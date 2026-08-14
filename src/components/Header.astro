@@ -59,9 +59,7 @@ import ThemeToggle from '@/components/ThemeToggle.astro';
     </nav>
 
     <div class="flex items-center gap-2">
-      <Button href={site.external.book} external size="sm" class="hidden sm:inline-flex"
-        >Book</Button
-      >
+      <Button href={site.book} size="sm" class="hidden sm:inline-flex">Book</Button>
       <ThemeToggle />
       {/* Mobile menu button */}
       <button
@@ -148,7 +146,7 @@ import ThemeToggle from '@/components/ThemeToggle.astro';
             )
           )
         }
-        <Button href={site.external.book} external class="mt-3">Book a class</Button>
+        <Button href={site.book} class="mt-3">Book a class</Button>
       </nav>
     </div>
   </div>

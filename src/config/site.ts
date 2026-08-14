@@ -39,9 +39,10 @@ export const site = {
     { day: 'Saturday', times: '9 am–1 pm, 3:30–6 pm' },
     { day: 'Sunday', times: '3:30–8 pm' },
   ],
+  /** Local booking route (embeds the Acuity scheduler on /book). */
+  book: '/book',
   /** Third-party services (kept as-is per project decisions). */
   external: {
-    book: 'https://sivanandacanada.org/toronto/book-a-yoga-class/',
     donate: 'https://checkout.square.site/merchant/MLVFQVFE88V53/checkout/6LZW7K4VLLAYOYUOVJ3STY2P',
     newsletter:
       'https://visitor.r20.constantcontact.com/manage/optin?v=001DFTCDgfTjaiiqq2g70t_GRawETeAK0eAAwF6LciMN4BsJ9pmPAXn1-XhBUEccp-s3TO7upklh3aquiW4OObjSF9h0urISSWzZBZcYOU8_COE5yf0Z_rsndvXe3RGIBgD8pkkojqL-ELMFuwt5EUf8M8Rk0tMZWwk8R7fI8GNDgg%3D',

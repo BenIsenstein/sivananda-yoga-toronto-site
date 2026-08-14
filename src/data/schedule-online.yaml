@@ -1,0 +1,61 @@
+# Online weekly class schedule (Zoom). Registration closes 15 min before class.
+# Source of truth: TablePress table on the live "Online" page
+# (https://sivanandacanada.org/toronto/online-schedule/).
+# Quote all time strings. classType values match src/data/schedule-meta.ts.
+
+classes:
+  # 6:30 – 7:30 AM
+  - day: Wednesday
+    start: '06:30'
+    end: '07:30'
+    label: Gentle class
+    classType: Other
+    acuity: 'https://sivanandatoronto.as.me/gentle'
+
+  # 10:30 – 12:00 PM
+  - day: Saturday
+    start: '10:30'
+    end: '12:00'
+    label: Intermediate
+    classType: Intermediate
+    acuity: 'https://sivanandatoronto.as.me/openclass'
+
+  # 5:00 – 6:30 PM
+  - day: Tuesday
+    start: '17:00'
+    end: '18:30'
+    label: Meditative
+    classType: Meditative
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=88036538'
+  - day: Friday
+    start: '17:00'
+    end: '18:30'
+    label: Intermediate
+    classType: Intermediate
+    acuity: 'https://sivanandatoronto.as.me/openclass'
+
+  # 6:30 – 8:00 PM
+  - day: Monday
+    start: '18:30'
+    end: '20:00'
+    label: Intermediate
+    classType: Intermediate
+    acuity: 'https://sivanandatoronto.as.me/openclass'
+  - day: Wednesday
+    start: '18:30'
+    end: '20:00'
+    label: Intermediate
+    classType: Intermediate
+    acuity: 'https://sivanandatoronto.as.me/openclass'
+  - day: Thursday
+    start: '18:30'
+    end: '20:00'
+    label: Intermediate
+    classType: Intermediate
+    acuity: 'https://sivanandatoronto.as.me/openclass'
+  - day: Friday
+    start: '18:30'
+    end: '20:00'
+    label: Variations
+    classType: Variations
+    acuity: 'https://sivanandatoronto.as.me/openclass'

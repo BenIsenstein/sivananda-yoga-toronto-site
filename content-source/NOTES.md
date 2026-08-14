@@ -15,6 +15,11 @@
 3. **Transfer fee discrepancy**: the Terms page says a **$10** course-transfer fee; the
    newer Refund page (2025) says **$20**. Used **$20** (newer) on `/policies/refund` and
    left the Terms page fee unspecified. Confirm with client.
+4. **Satsang day/time discrepancy**: the standalone Satsang page (last modified 2020,
+   still COVID-era) says **Sunday 6:30–8:00 pm**; the current 2026 **Class Schedule** table
+   lists Satsang on **Friday 8:00–9:30 pm** (and has **no Sunday classes**). The schedule is
+   newer and operational, so Friday 8 pm is treated as current. `/satsang` no longer states a
+   specific day/time — it defers to `/schedule`, with a hidden `TODO(client)` to confirm.
 
 ## Events surfaces (three related routes on the live site) — Epic 5
 

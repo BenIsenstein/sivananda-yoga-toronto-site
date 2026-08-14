@@ -1,0 +1,60 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Card from '@/components/ui/Card.astro';
+import Button from '@/components/ui/Button.astro';
+import { passes, giftCards } from '@/data/schedule-meta';
+---
+
+<PageLayout
+  title="Passes & Gift Cards"
+  lead="Our class passes are valid for all online and in-studio drop-in classes."
+  description="Yoga class passes, memberships and gift cards for the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <section aria-label="Class passes">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        passes.map((pass) => (
+          <Card class="flex flex-col p-6">
+            <h2 class="font-serif text-xl text-foreground">{pass.name}</h2>
+            <p class="mt-2 text-3xl font-semibold text-primary">{pass.price}</p>
+            <Button href={pass.url} external class="mt-4 self-start" size="sm">
+              Purchase
+            </Button>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-14" aria-label="Gift cards">
+    <h2 class="mb-5 font-serif text-3xl text-foreground">Gift Cards</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <Card class="p-6">
+        <h3 class="font-serif text-xl text-foreground">Yoga e-gift cards</h3>
+        <p class="mt-2 text-muted-foreground">
+          Sent by email — you choose the delivery date and time, and select among many
+          denominations.
+        </p>
+        <Button href={giftCards.eGift} external variant="secondary" class="mt-4">
+          Send an e-gift card
+        </Button>
+      </Card>
+      <Card class="p-6">
+        <h3 class="font-serif text-xl text-foreground">Yoga printed gift cards</h3>
+        <p class="mt-2 text-muted-foreground">
+          Sent by post to the address you indicate, or pick them up from the Yoga Centre. You can
+          also print them yourself and gift them!
+        </p>
+        <Button href={giftCards.printed} external variant="secondary" class="mt-4">
+          Order a printed card
+        </Button>
+      </Card>
+    </div>
+  </section>
+
+  <p class="mt-12 text-sm text-muted-foreground">
+    New to yoga? Start with our <a href="/new-to-yoga" class="text-primary hover:opacity-80"
+      >introductory courses</a
+    >, then use a pass for daily classes.
+  </p>
+</PageLayout>
