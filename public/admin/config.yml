@@ -13,7 +13,9 @@ backend:
   # Replace the placeholder with the broker's public origin (no trailing slash).
   # See cms-auth/README.md and CMS-USAGE.md.
   base_url: https://artistic-passion-production-d037.up.railway.app
-  auth_endpoint: oauth
+  # The broker (cms-auth/) serves the auth route at /auth, so auth_endpoint must
+  # be `auth` (Sveltia requests `${base_url}/${auth_endpoint}`).
+  auth_endpoint: auth
 
 # Default upload location (per-field overrides below keep assets colocated).
 media_folder: src/assets
