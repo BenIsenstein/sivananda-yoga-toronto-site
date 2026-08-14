@@ -12,7 +12,7 @@ backend:
   # OAuth handled by the self-hosted broker in `cms-auth/` (deployed to Railway).
   # Replace the placeholder with the broker's public origin (no trailing slash).
   # See cms-auth/README.md and CMS-USAGE.md.
-  base_url: https://REPLACE-WITH-OAUTH-BROKER-ORIGIN
+  base_url: https://artistic-passion-production-d037.up.railway.app
   auth_endpoint: oauth
 
 # Default upload location (per-field overrides below keep assets colocated).
