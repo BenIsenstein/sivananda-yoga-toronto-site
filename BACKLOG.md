@@ -226,9 +226,14 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 6 — Sveltia CMS
 
-- [ ] `public/admin` Sveltia config for `events` + editable pages
-- [ ] GitHub OAuth (app + broker) for staff login
-- [ ] Author docs (how to add an event)
+- [x] `public/admin` Sveltia config for `events` + editable pages (events, courses,
+      policies — all 3 collections; fields mirror the Zod schema exactly)
+- [x] GitHub OAuth (app + broker) for staff login — broker built in `cms-auth/`
+      (zero-dep Node port of the official `sveltia-cms-auth` worker; verbatim OAuth
+      logic + `node:http` bootstrap, deploy to Railway as a separate service).
+      Owner creates the OAuth App + provisions secrets (never committed).
+- [x] Author docs (`CMS-USAGE.md`: how to add an event/course, images, single vs
+      multi-day, by-donation, ongoing items, rebuild delay + admin setup section)
 
 ### Epic 7 — SEO & Redirects
 

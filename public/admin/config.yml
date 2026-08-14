@@ -1,0 +1,214 @@
+# Sveltia CMS configuration — Toronto Sivananda Yoga Vedanta Centre
+# Docs: https://github.com/sveltia/sveltia-cms (Decap-compatible schema)
+#
+# Backend: GitHub. Editors need write access to the repo (added as collaborators).
+# Saving an entry commits to `main`, which triggers a Railway rebuild
+# (changes go live in ~1–2 minutes — not instant). See CMS-USAGE.md.
+
+backend:
+  name: github
+  repo: BenIsenstein/sivananda-yoga-toronto-site
+  branch: main
+  # OAuth handled by the self-hosted broker in `cms-auth/` (deployed to Railway).
+  # Replace the placeholder with the broker's public origin (no trailing slash).
+  # See cms-auth/README.md and CMS-USAGE.md.
+  base_url: https://REPLACE-WITH-OAUTH-BROKER-ORIGIN
+  auth_endpoint: oauth
+
+# Default upload location (per-field overrides below keep assets colocated).
+media_folder: src/assets
+public_folder: /src/assets
+
+# Editors can save drafts as "unpublished" isn't used (direct-to-main workflow).
+publish_mode: simple
+
+collections:
+  # ---------------------------------------------------------------------------
+  # Events — dated instances (auto-hide when past). Workshops, courses runs,
+  # retreats, and ongoing teacher trainings.
+  # ---------------------------------------------------------------------------
+  - name: events
+    label: Events
+    label_singular: Event
+    description: >-
+      Dated workshops, course runs, retreats and trainings. Past events are
+      hidden automatically once their end date passes.
+    folder: src/content/events
+    media_folder: '../../assets/events'
+    public_folder: '../../assets/events'
+    create: true
+    # New files: title + start date, e.g. chair-yoga-2026-08-15.md
+    # (keeps recurring same-title events from colliding).
+    slug: '{{fields.title | slug}}-{{fields.start | date(''YYYY-MM-DD'')}}'
+    sortable_fields: [start, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+
+      - name: categories
+        label: Categories
+        widget: select
+        multiple: true
+        min: 1
+        hint: >-
+          Choose one or more. These drive the filter pills on the Events page.
+        options:
+          - Regular Courses
+          - Special Practices
+          - Education
+          - Retreats
+          - Teacher Trainings
+
+      - name: start
+        label: Start date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        picker_utc: true
+        required: false
+        hint: >-
+          Leave empty only for ongoing/undated items (also turn on "Ongoing").
+
+      - name: end
+        label: End date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        picker_utc: true
+        required: false
+        hint: >-
+          Only for multi-day events. Leave empty for a single-day event.
+
+      - name: time
+        label: Time (text)
+        widget: string
+        required: false
+        hint: >-
+          Free text, e.g. "6:30–7:45 pm". Shown on single-day events.
+
+      - name: price
+        label: Price (text)
+        widget: string
+        required: false
+        hint: 'Free text, e.g. "$120" or "By donation".'
+
+      - name: image
+        label: Image
+        widget: image
+        required: false
+        choose_url: false
+        media_folder: '../../assets/events'
+        public_folder: '../../assets/events'
+
+      - { name: imageAlt, label: Image alt text, widget: string, required: false }
+
+      - name: teacher
+        label: Teacher / facilitator
+        widget: string
+        required: false
+
+      - name: registerUrl
+        label: Register link
+        widget: string
+        required: false
+        hint: >-
+          Acuity/Square URL. For by-donation events, put the Square donate link
+          here and explain the email step in "Register note".
+
+      - name: registerNote
+        label: Register note
+        widget: text
+        required: false
+        hint: >-
+          Fallback text for donation/email registration, shown under the button.
+
+      - name: ongoing
+        label: Ongoing (no fixed dates)
+        widget: boolean
+        default: false
+        hint: >-
+          Turn on for items announced through the year (e.g. teacher trainings).
+          Ongoing events always show and sort last.
+
+      - { name: draft, label: Draft (hide from site), widget: boolean, default: false }
+
+      - name: body
+        label: Description
+        widget: markdown
+        required: false
+
+  # ---------------------------------------------------------------------------
+  # Courses — evergreen subject/description pages (no dates).
+  # ---------------------------------------------------------------------------
+  - name: courses
+    label: Courses
+    label_singular: Course
+    description: >-
+      Evergreen course description pages (no dates). Add dated runs as Events.
+    folder: src/content/courses
+    media_folder: '../../assets/courses'
+    public_folder: '../../assets/courses'
+    create: true
+    slug: '{{fields.title | slug}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: summary, label: Summary, widget: text }
+
+      - name: order
+        label: Sort order
+        widget: number
+        default: 99
+        value_type: int
+        hint: 'Lower numbers appear first on the Courses hub.'
+
+      - name: image
+        label: Image
+        widget: image
+        required: false
+        choose_url: false
+        media_folder: '../../assets/courses'
+        public_folder: '../../assets/courses'
+
+      - { name: imageAlt, label: Image alt text, widget: string, required: false }
+
+      - name: registerUrl
+        label: Register link
+        widget: string
+        required: false
+
+      - { name: draft, label: Draft (hide from site), widget: boolean, default: false }
+
+      - name: body
+        label: Description
+        widget: markdown
+        required: false
+
+  # ---------------------------------------------------------------------------
+  # Policies — legal/prose pages.
+  # ---------------------------------------------------------------------------
+  - name: policies
+    label: Policies
+    label_singular: Policy
+    folder: src/content/policies
+    create: true
+    slug: '{{fields.title | slug}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+
+      - name: order
+        label: Sort order
+        widget: number
+        default: 99
+        value_type: int
+
+      - name: pdfUrl
+        label: PDF URL
+        widget: string
+        required: false
+        hint: 'Optional path to a PDF in /public (e.g. /policies/misconduct.pdf) or a full URL.'
+
+      - name: body
+        label: Body
+        widget: markdown
+        required: false

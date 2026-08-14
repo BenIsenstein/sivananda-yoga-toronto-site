@@ -1,0 +1,31 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
+---
+
+<PageLayout
+  title="Page not found"
+  lead="Sorry — we couldn't find that page."
+  description="The page you're looking for doesn't exist or has moved."
+  narrow
+>
+  <Prose>
+    <p>
+      The page you were looking for may have moved or no longer exists. Here are a few helpful
+      places to continue:
+    </p>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/schedule">Class schedule</a></li>
+      <li><a href="/events">Workshops &amp; events</a></li>
+      <li><a href="/contact">Contact us</a></li>
+    </ul>
+  </Prose>
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    <Button href="/">Back to home</Button>
+    <Button href={site.book} variant="secondary">Book a class</Button>
+  </div>
+</PageLayout>

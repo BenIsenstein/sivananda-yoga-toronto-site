@@ -4,3 +4,6 @@ node_modules/
 pnpm-lock.yaml
 public/
 .agents/
+
+# Standalone OAuth broker (verbatim upstream port; kept diff-able)
+cms-auth/

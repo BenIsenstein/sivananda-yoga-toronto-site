@@ -1,0 +1,14 @@
+{
+  "name": "sivananda-cms-auth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sveltia CMS GitHub OAuth broker (Node port of sveltia-cms-auth) for Railway.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
