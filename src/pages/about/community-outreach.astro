@@ -1,7 +1,21 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
+import Gallery from '@/components/Gallery.astro';
 import { site } from '@/config/site';
+import o1 from '@/assets/about/hub-outreach.jpg';
+import o2 from '@/assets/about/outreach-2.jpg';
+import o3 from '@/assets/about/outreach-3.jpg';
+import o4 from '@/assets/about/outreach-4.jpg';
+import o5 from '@/assets/about/outreach-medical-camps.jpg';
+
+const gallery = [
+  { src: o1, alt: 'Community outreach program' },
+  { src: o2, alt: 'Community outreach program' },
+  { src: o3, alt: 'Community outreach program' },
+  { src: o4, alt: 'Community outreach program' },
+  { src: o5, alt: 'Rural medical camp' },
+];
 
 const fundraising = [
   'Doctors Without Borders (Project Syria)',
@@ -53,4 +67,6 @@ const programs = [
     <p>We have conducted tailored yoga and meditation programs at the following sites:</p>
     <ul>{programs.map((p) => <li>{p}</li>)}</ul>
   </Prose>
+
+  <Gallery images={gallery} class="mt-10" />
 </PageLayout>

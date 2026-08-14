@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const courses = await getCollection('courses', ({ data }) => !data.draft);
@@ -22,6 +23,16 @@ const { Content } = await render(course);
   description={course.data.summary}
   narrow
 >
+  {
+    course.data.image && (
+      <Image
+        src={course.data.image}
+        alt={course.data.imageAlt ?? course.data.title}
+        loading="eager"
+        class="mb-8 aspect-video w-full rounded-xl border border-border object-cover"
+      />
+    )
+  }
   <Prose>
     <Content />
   </Prose>

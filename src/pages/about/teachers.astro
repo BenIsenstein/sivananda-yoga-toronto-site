@@ -2,6 +2,9 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Tabs from '@/components/ui/Tabs.astro';
 import Prose from '@/components/Prose.astro';
+import { Image } from 'astro:assets';
+import sivananda from '@/assets/teachers/swami-sivananda.jpg';
+import vishnudevananda from '@/assets/teachers/swami-vishnudevananda.jpg';
 
 const tabs = [
   { id: 'sivananda', label: 'Swami Sivananda' },
@@ -17,6 +20,12 @@ const tabs = [
 >
   <Tabs tabs={tabs}>
     <Prose slot="sivananda">
+      <Image
+        src={sivananda}
+        alt="Swami Sivananda"
+        loading="eager"
+        class="float-none mb-4 w-40 rounded-xl border border-border sm:float-right sm:ml-6"
+      />
       <p>
         Swami Sivananda's life was a radiant example of service to humanity, both during his years
         as a doctor and later as a world-renowned sage and jivanmukta. To serve all, to love all, to
@@ -46,6 +55,12 @@ const tabs = [
     </Prose>
 
     <Prose slot="vishnudevananda">
+      <Image
+        src={vishnudevananda}
+        alt="Swami Vishnudevananda"
+        loading="lazy"
+        class="float-none mb-4 w-40 rounded-xl border border-border sm:float-right sm:ml-6"
+      />
       <p>
         A disciple of Swami Sivananda, Swami Vishnudevananda was born in Kerala, south India on
         December 31, 1927. During his career in the army, he discovered Swami Sivananda's teachings

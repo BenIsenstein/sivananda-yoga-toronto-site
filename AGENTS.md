@@ -108,3 +108,31 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Remote-access tooling (infra, NOT part of the site/backlog)
+
+A `remote-dev.sh` script lets the owner drive development remotely from a phone.
+It starts `pnpm dev`, `code serve-web`, and `opencode serve`, then exposes all
+three over a persistent Cloudflare named tunnel gated by Cloudflare Access
+(email OTP):
+
+- `dev.ironstone.work` -> astro dev (`:4321`)
+- `code.ironstone.work` -> VS Code web (`:8000`)
+- `agent.ironstone.work` -> opencode (`:4096`)
+
+**Files:** `remote-dev.sh` (orchestration + idempotent Cloudflare setup),
+`.env` (gitignored — Cloudflare API token/account/email/domain; never commit or
+echo it), `.gitignore` (adds `remote-dev-logs/`), and one line in
+`astro.config.mjs`: `vite.server.allowedHosts` reads `process.env.REMOTE_DEV_HOST`
+(falls back to `[]`). That line is a no-op for normal builds — leave it in place.
+
+**Impact on site work:** none. Ignore `remote-dev.sh`, `.env`, and
+`remote-dev-logs/`. Do not commit these as part of an epic; they are separate
+infra.
+
+> **NEVER shut down any processes on ports 4321, 8000, or 4096 during
+> development or gate checks.** These belong to the owner's live remote session
+> (astro dev, VS Code web, opencode). Do not kill them, do not run
+> `astro dev stop`, and do not free/rebind those ports. If a dev server is
+> needed for a check, assume the one on `:4321` is already running, or use a
+> different port — never terminate the running processes.

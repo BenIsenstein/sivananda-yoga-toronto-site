@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import hero from '@/assets/about/new-to-yoga.jpg';
 
 const packageUrl =
   'https://app.acuityscheduling.com/catalog.php?owner=21122031&action=addCart&clear=1&id=1908379';
@@ -11,6 +12,8 @@ const packageUrl =
   title="New to Yoga"
   lead="We teach yoga in a precise and simple way. Here's where to begin."
   description="Introductory yoga courses (Yoga 1 & Yoga 2) for beginners at the Toronto Sivananda Yoga Vedanta Centre."
+  heroImage={hero}
+  heroAlt="Beginning a yoga practice at the Sivananda Yoga Centre"
   narrow
 >
   <Prose>

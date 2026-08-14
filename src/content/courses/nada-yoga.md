@@ -2,6 +2,8 @@
 title: Nada Yoga & Mantras
 summary: Inner healing through the yoga of sound — mantra, kirtan and live Sitar music with Ram Vakkalanka.
 order: 7
+image: ../../assets/courses/nada-yoga.jpg
+imageAlt: Ram Vakkalanka playing the sitar
 ---
 
 There is something sacred inside each one of us that vibrates in perfect harmony with the Universe. However, the cacophony of our thoughts prevents us from enjoying this inner harmony. **Nada Yoga** teaches us how to rise above this noise, go deeper into our hearts, and discover the inexhaustible source of inner peace and strength there.

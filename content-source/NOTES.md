@@ -16,6 +16,54 @@
    newer Refund page (2025) says **$20**. Used **$20** (newer) on `/policies/refund` and
    left the Terms page fee unspecified. Confirm with client.
 
+## Events surfaces (three related routes on the live site) — Epic 5
+
+The live site has **three overlapping event surfaces**, all powered by the EventON plugin:
+
+- **`/yoga-workshop/`** — the page the nav's "Workshops/ Events" link points to. Has an
+  intro ("Lifelong Learning") **plus a filtered feed of workshops & specialized courses**
+  (Intensive Asana, Intro to Meditation, Chair Yoga, Kirtan, Ayurvedic Nutrition, etc.).
+- **`/programs/`** — NOT in the nav; linked from the homepage "See All Workshops, Events,
+  Courses". A **broader, unfiltered feed of ALL events** — a superset that also includes
+  drop-in-style items (Yoga at the Park, Yoga Level 1/2 course cohorts, etc.).
+- **`/events/<slug>`** — individual event detail pages (e.g. `/events/kirtan-with-shell-and-anton/`).
+
+**"Lifelong Learning" intro (verbatim, from `/yoga-workshop/`):**
+
+> If you would like to learn more about different aspects of yoga and related subjects, here
+> are our workshops, events and specialized courses. From cooking workshops to philosophy,
+> hatha yoga to chanting and ayurveda, all the programs are designed to help you achieve
+> improved physical, mental and spiritual well-being. We add new topics and dates frequently.
+> Check back regularly, or follow us on Instagram for updates.
+
+**Our consolidation decision (Epic 5):** collapse these into a single `/events` collection
+(Model B) + `/events/[slug]` detail pages, with **category/type filtering** to reproduce
+BOTH surfaces: a curated "Workshops & Courses" view (≈ `/yoga-workshop/`) and an "All events"
+view (≈ `/programs/`). Preserve the "Lifelong Learning" intro on the curated view. This is a
+deliberate merge, recorded here to avoid drift.
+
+### Proposed event taxonomy (owner input — refine in Epic 5)
+
+How many pages/collections this maps to is TBD; use these **types** as the starting model:
+
+- **Regular Practices** — the normal weekly drop-in classes. Go on a **static weekly
+  calendar** (not the events feed) and don't change week to week. (Overlaps with Epic 4
+  schedule grid — decide whether these live in the schedule, the events model, or both.)
+- **Regular Courses** — regularly repeating multi-week courses: **Yoga 1, Yoga 2,
+  Intro to Meditation**. Recurring cohorts with start dates.
+- **Special Practices** — one-off or seasonal yoga practices: **Yoga in the Park,
+  3-hour Asana Intensive, Chair Yoga**, etc.
+- **Education** — teachings that are informational, not practice-based: **philosophy,
+  Ayurveda**, talks, workshops.
+- **Retreats** — contiguous time away: **Ashram retreats, weekend retreats**.
+- **Teacher Trainings** — TBD whether these belong in the events collection at all.
+  Leaning toward **their own page + external links** (Ashram TTC is already external;
+  chair/gentle/prenatal TT already exist as `/training/*` pages). Revisit in Epic 5.
+
+Open questions for Epic 5: which types are `category` values on one `events` collection vs.
+separate collections/pages; how "Regular Practices" reconcile with the Epic 4 weekly schedule
+grid; whether Teacher Trainings stay out of events entirely.
+
 ## Facts to preserve
 
 ### Location / neighbourhood

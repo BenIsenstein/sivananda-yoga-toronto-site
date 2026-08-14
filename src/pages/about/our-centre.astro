@@ -1,6 +1,24 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
+import Gallery from '@/components/Gallery.astro';
+import c1 from '@/assets/about/our-centre-1.jpg';
+import c3 from '@/assets/about/our-centre-3.jpg';
+import c4 from '@/assets/about/our-centre-4.jpg';
+import c6 from '@/assets/about/our-centre-6.jpg';
+import c7 from '@/assets/about/our-centre-7.jpg';
+import c8 from '@/assets/about/our-centre-8.jpg';
+import c9 from '@/assets/about/our-centre-9.jpg';
+
+const gallery = [
+  { src: c1, alt: 'Toronto Sivananda Yoga Vedanta Centre' },
+  { src: c3, alt: 'Yoga practice at the Centre' },
+  { src: c4, alt: 'Inside the Centre' },
+  { src: c6, alt: 'Indian vegetarian cooking class at the Centre' },
+  { src: c7, alt: 'Community at the Centre' },
+  { src: c8, alt: 'Workshop at the Centre' },
+  { src: c9, alt: 'Gathering at the Centre' },
+];
 
 {
   /* TODO(client): confirm founding timeline — 1959 (org) / 1962 (Toronto chapter) / 1992 (current Centre). Synthesized from two source pages (About says 1962; Our Centre says 1992; org founded 1959). */
@@ -66,5 +84,10 @@ const timeline = [
         ))
       }
     </ol>
+  </section>
+
+  <section class="mt-12" aria-label="Photos of the Centre">
+    <h2 class="mb-6 font-serif text-3xl text-foreground">Life at the Centre</h2>
+    <Gallery images={gallery} />
   </section>
 </PageLayout>

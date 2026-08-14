@@ -1,0 +1,163 @@
+---
+/**
+ * AsanaCarousel — a full-width photo strip that cycles through the 7 asana
+ * images from the original homepage slider (Sun Salutation → Meditation).
+ *
+ * Faithful to the source (Slider Revolution): fullwidth band, fade transition,
+ * dot bullets, auto-advancing slideshow. Rebuilt as a self-contained section
+ * with vanilla JS (no dependencies, no React) and images optimized via
+ * astro:assets. Light + dark aware; respects prefers-reduced-motion.
+ *
+ * Reusable + standalone: drop <AsanaCarousel /> anywhere. Keeping this file in
+ * the repo regardless of whether it's currently placed on a page.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import sunSalutation from '@/assets/hero/sun-salutation.jpg';
+import bodakonasana from '@/assets/hero/bodakonasana.jpg';
+import anjaneyasana from '@/assets/hero/anjaneyasana.jpg';
+import dhanurasana from '@/assets/hero/dhanurasana.jpg';
+import forwardBendPrep from '@/assets/hero/forward-bend-prep.jpg';
+import ardhaMatsyendrasana from '@/assets/hero/ardha-matsyendrasana.jpg';
+import meditation from '@/assets/hero/meditation.jpg';
+
+interface Props {
+  /** Optional short heading above the strip. Pass `null`/'' to hide. */
+  heading?: string | null;
+  /** Milliseconds each slide is shown before advancing. */
+  interval?: number;
+  class?: string;
+}
+
+const { heading = 'Our Practice', interval = 5000, class: className } = Astro.props;
+
+const slides: { src: ImageMetadata; name: string }[] = [
+  { src: sunSalutation, name: 'Sun Salutation' },
+  { src: bodakonasana, name: 'Baddha Konasana' },
+  { src: anjaneyasana, name: 'Anjaneyasana' },
+  { src: dhanurasana, name: 'Dhanurasana' },
+  { src: forwardBendPrep, name: 'Forward Bend' },
+  { src: ardhaMatsyendrasana, name: 'Ardha Matsyendrasana' },
+  { src: meditation, name: 'Meditation' },
+];
+---
+
+<section
+  class:list={['border-b border-border bg-muted/30', className]}
+  aria-roledescription="carousel"
+  aria-label="Sivananda yoga asanas"
+  data-asana-carousel
+  data-interval={interval}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+    {
+      heading && (
+        <h2 class="mb-6 text-center font-serif text-3xl text-foreground sm:text-4xl">{heading}</h2>
+      )
+    }
+
+    <div
+      class="relative aspect-16/9 w-full overflow-hidden rounded-2xl border border-border bg-card sm:aspect-21/9"
+    >
+      {
+        slides.map((slide, i) => (
+          <div
+            class="absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out data-[active]:opacity-100"
+            data-slide={i}
+            data-active={i === 0 ? '' : undefined}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${slides.length}: ${slide.name}`}
+            aria-hidden={i === 0 ? 'false' : 'true'}
+          >
+            <Image
+              src={slide.src}
+              alt={`${slide.name} — Sivananda yoga`}
+              widths={[640, 1024, 1600]}
+              sizes="(min-width: 1152px) 1152px, 100vw"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              class="h-full w-full object-cover"
+            />
+            {/* Scrim keeps the caption readable over any photo, in light + dark */}
+            <div
+              class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 sm:p-6"
+              aria-hidden="true"
+            >
+              <span class="font-serif text-lg text-white drop-shadow sm:text-2xl">
+                {slide.name}
+              </span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Dot bullets (echoing the original "hermes" bullets) */}
+    <div
+      class="mt-5 flex items-center justify-center gap-2.5"
+      role="tablist"
+      aria-label="Choose slide"
+    >
+      {
+        slides.map((slide, i) => (
+          <button
+            type="button"
+            role="tab"
+            data-dot={i}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-label={slide.name}
+            class="size-3 rounded-full border border-border bg-transparent transition-colors aria-selected:border-primary aria-selected:bg-primary hover:bg-muted-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-asana-carousel]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+    if (slides.length === 0) return;
+
+    const interval = Number(root.dataset.interval) || 5000;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.toggleAttribute('data-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach((dot, i) => dot.setAttribute('aria-selected', String(i === current)));
+    }
+
+    function start() {
+      if (reduceMotion || slides.length < 2) return;
+      stop();
+      timer = setInterval(() => show(current + 1), interval);
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+    }
+
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        show(i);
+        start();
+      })
+    );
+
+    // Pause on hover / when tab is hidden.
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    show(0);
+    start();
+  });
+</script>

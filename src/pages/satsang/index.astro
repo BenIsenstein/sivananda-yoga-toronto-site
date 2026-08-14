@@ -2,12 +2,15 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import { site } from '@/config/site';
+import hero from '@/assets/satsang/satsang.jpg';
 ---
 
 <PageLayout
   title="Satsang — Free Group Meditation"
   lead="Satsang means 'association with the wise' — the heart of yoga practice."
   description="Free weekly satsang (group meditation, chanting and a short talk) at the Toronto Sivananda Yoga Vedanta Centre."
+  heroImage={hero}
+  heroAlt="Satsang at the Centre"
   narrow
 >
   <Prose>

@@ -2,6 +2,8 @@
 title: Ayurvedic Nutrition & Cooking
 summary: Learn Ayurvedic nutrition and food combinations that promote health and digestion, with Dr. Sonal Bhatt.
 order: 4
+image: ../../assets/courses/ayurvedic-nutrition.jpg
+imageAlt: Ayurvedic cooking ingredients
 ---
 
 Our Ayurvedic Nutrition and Cooking Course, taught by **Dr. Sonal Bhatt**, gives students a comprehensive understanding of Ayurvedic nutrition and food combinations that promote health and digestion. Students learn how to plan well-balanced, nutritious vegetarian meals made from grains, beans, vegetables, fruits, seeds, dairy products, fats, spices and herbs, based on Ayurvedic principles.

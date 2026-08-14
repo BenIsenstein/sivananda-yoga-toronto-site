@@ -2,6 +2,8 @@
 title: Vedic Studies
 summary: Sanskrit, Vedic astrology and Vedic sciences with internationally recognized teacher Ram Vakkalanka.
 order: 6
+image: ../../assets/courses/vedic-studies.jpg
+imageAlt: Vedic studies with Ram Vakkalanka
 ---
 
 Our Vedic Studies offerings, taught by **Ram Vakkalanka**, explore Sanskrit, Vedic astrology and the Vedic sciences.

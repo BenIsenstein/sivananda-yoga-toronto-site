@@ -1,37 +1,126 @@
 ---
-/** Hero — homepage headline section with subtle token-based gradient. Light + dark aware. */
+/**
+ * Hero — homepage headline section.
+ *
+ * Option A: the 7 asana photos from the original slider slowly crossfade in the
+ * BACKGROUND, behind a token-based scrim that keeps the headline + CTAs legible
+ * in both light and dark themes. Vanilla JS (no deps), respects
+ * prefers-reduced-motion (shows the first image statically). Images optimized
+ * via astro:assets.
+ */
 import Button from '@/components/ui/Button.astro';
 import Badge from '@/components/ui/Badge.astro';
 import { site } from '@/config/site';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import sunSalutation from '@/assets/hero/sun-salutation.jpg';
+import bodakonasana from '@/assets/hero/bodakonasana.jpg';
+import anjaneyasana from '@/assets/hero/anjaneyasana.jpg';
+import dhanurasana from '@/assets/hero/dhanurasana.jpg';
+import forwardBendPrep from '@/assets/hero/forward-bend-prep.jpg';
+import ardhaMatsyendrasana from '@/assets/hero/ardha-matsyendrasana.jpg';
+import meditation from '@/assets/hero/meditation.jpg';
 
 interface Props {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  /** Milliseconds each background image is shown before crossfading. */
+  interval?: number;
 }
 
 const {
   eyebrow = 'Classical Sivananda tradition',
   title = 'Yoga & Meditation in Toronto',
   subtitle = 'Daily Hatha yoga classes, courses, workshops and retreats — in person at 77 Harbord Street and online.',
+  interval = 6000,
 } = Astro.props;
+
+const backgrounds: ImageMetadata[] = [
+  sunSalutation,
+  bodakonasana,
+  anjaneyasana,
+  dhanurasana,
+  forwardBendPrep,
+  ardhaMatsyendrasana,
+  meditation,
+];
 ---
 
-<section class="relative overflow-hidden border-b border-border">
-  {/* Decorative, theme-aware gradient wash */}
+<section class="relative overflow-hidden border-b border-border" data-hero data-interval={interval}>
+  {/* Crossfading background photos (decorative) */}
+  <div class="absolute inset-0 -z-20" aria-hidden="true">
+    {
+      backgrounds.map((src, i) => (
+        <Image
+          src={src}
+          alt=""
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          data-hero-bg={i}
+          class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-[1500ms] ease-in-out data-[active]:opacity-100"
+        />
+      ))
+    }
+  </div>
+
+  {/* Token-based scrim: keeps text legible over any photo, in light + dark */}
   <div
-    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,var(--accent)_0%,transparent_70%)] opacity-60"
+    class="absolute inset-0 -z-10 bg-background/80 backdrop-blur-[1px] dark:bg-background/75"
     aria-hidden="true"
   >
   </div>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_70%_at_50%_0%,var(--accent)_0%,transparent_70%)] opacity-50"
+    aria-hidden="true"
+  >
+  </div>
+
   <div class="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-32">
     <Badge variant="secondary" class="mb-6">{eyebrow}</Badge>
     <h1 class="text-5xl text-foreground sm:text-6xl">{title}</h1>
     <p class="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">{subtitle}</p>
     <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-      <Button href="/new-to-yoga" size="lg">New to Yoga?</Button>
-      <Button href="/schedule" variant="outline" size="lg">View Schedule</Button>
-      <Button href={site.external.book} external variant="ghost" size="lg">Book a Class</Button>
+      <Button href={site.external.book} external size="lg">Book a Class</Button>
+      <Button href="/new-to-yoga" variant="secondary" size="lg">New to Yoga?</Button>
+      <Button href="/schedule" variant="secondary" size="lg">View Schedule</Button>
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero]').forEach((hero) => {
+    const bgs = Array.from(hero.querySelectorAll<HTMLElement>('[data-hero-bg]'));
+    if (bgs.length === 0) return;
+
+    // Always show the first image.
+    bgs[0].toggleAttribute('data-active', true);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || bgs.length < 2) return;
+
+    const interval = Number(hero.dataset.interval) || 6000;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+
+    function advance() {
+      const next = (current + 1) % bgs.length;
+      bgs[current].toggleAttribute('data-active', false);
+      bgs[next].toggleAttribute('data-active', true);
+      current = next;
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(advance, interval);
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+    }
+
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    start();
+  });
+</script>

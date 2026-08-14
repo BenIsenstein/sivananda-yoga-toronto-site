@@ -1,18 +1,37 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import { site } from '@/config/site';
 ---
 
 <PageLayout
   title="Workshops & Events"
-  lead="Our full workshops and events calendar is coming soon to the new site."
-  description="Yoga workshops, courses and events at the Toronto Sivananda Yoga Vedanta Centre."
+  lead="Lifelong learning — workshops, events and specialized courses throughout the year."
+  description="Yoga workshops, events and specialized courses at the Toronto Sivananda Yoga Vedanta Centre."
+  narrow
 >
-  <p class="text-muted-foreground">
-    We host meditation courses, kirtan, chair yoga, seasonal gatherings and more throughout the
-    year. The new events calendar is on its way. In the meantime, explore our courses.
-  </p>
-  <div class="mt-6">
-    <Button href="/courses">Browse courses</Button>
+  <Prose>
+    <p>
+      If you would like to learn more about different aspects of yoga and related subjects, here are
+      our workshops, events and specialized courses. From cooking workshops to philosophy, hatha
+      yoga to chanting and ayurveda, all the programs are designed to help you achieve improved
+      physical, mental and spiritual well-being.
+    </p>
+    <p>
+      We add new topics and dates frequently. Check back regularly, or follow us on
+      <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> for updates.
+    </p>
+  </Prose>
+
+  <div class="mt-8 rounded-xl border border-border bg-muted/40 p-6">
+    <p class="text-muted-foreground">
+      Our full events calendar is coming soon to the new site. In the meantime, explore our courses
+      or book a class.
+    </p>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <Button href="/courses">Browse courses</Button>
+      <Button href={site.external.book} external variant="secondary">Book a class</Button>
+    </div>
   </div>
 </PageLayout>

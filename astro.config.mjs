@@ -10,6 +10,11 @@ export default defineConfig({
   site: 'https://sivananda-yoga-toronto-site.up.railway.app',
   vite: {
     plugins: [tailwindcss()],
+    // Allow the Cloudflare tunnel hostname to reach the dev server (Vite blocks
+    // unknown Host headers by default). Set via remote-dev.sh.
+    server: {
+      allowedHosts: process.env.REMOTE_DEV_HOST ? [process.env.REMOTE_DEV_HOST] : [],
+    },
   },
   integrations: [sitemap()],
 });

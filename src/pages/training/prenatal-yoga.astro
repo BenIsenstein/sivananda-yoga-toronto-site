@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import hero from '@/assets/training/prenatal-yoga.jpeg';
 
 const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18746538';
 ---
@@ -10,6 +11,8 @@ const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18746538';
   title="Prenatal Yoga Teacher Training"
   lead="Learn to adapt yoga safely for each stage of pregnancy — Yoga Alliance continuing education."
   description="Prenatal Yoga Teacher Training (online) at the Toronto Sivananda Yoga Vedanta Centre."
+  heroImage={hero}
+  heroAlt="Prenatal yoga teacher training"
   narrow
 >
   <Prose>

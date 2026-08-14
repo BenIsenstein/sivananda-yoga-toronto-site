@@ -183,8 +183,10 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 **Wrap-up**
 
-- [ ] Download & optimize images → `astro:assets` — **deferred**: pages built text-first;
-      confirm with client which live-site images to carry over (many are stale) before adding.
+- [x] Download & optimize images → `astro:assets` (38 content images from live site;
+      Sharp installed; served as optimized WebP). Teacher portraits, About hub + Our Centre
+      gallery, Community Outreach gallery, course heroes, rental gallery, retreats, trainings,
+      kids/teens, satsang, fundraiser.
 - [x] Verify all nav targets resolve (no 404s); light + dark pass
 - [x] Added `/schedule`, `/online`, `/events` placeholders (full build in Epic 4/5) so nav is complete
 - [ ] Owner review pass
@@ -197,10 +199,23 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 5 — Events (Model B)
 
-- [ ] `events` collection schema (title, start/end, price, image, teacher, body, acuityUrl)
-- [ ] `/events` list (upcoming only) + `/events/[slug]`
+> **Consolidates three live surfaces** (see `content-source/NOTES.md`):
+> `/yoga-workshop/` (curated Workshops & specialized courses + "Lifelong Learning" intro),
+> `/programs/` (full events superset, not in nav), and `/events/<slug>` (detail pages)
+> into a **single filterable `/events` collection**. Category filtering reproduces both a
+> curated "Workshops & Courses" view and an "All events" view; the "Lifelong Learning"
+> intro is preserved on the curated view.
+
+- [ ] `events` collection schema (title, start/end, price, image, teacher, body, acuityUrl, category)
+- [ ] Decide event **taxonomy → pages/collections** (owner input; see `content-source/NOTES.md`):
+      Regular Practices (static weekly calendar), Regular Courses (Yoga 1/2, Intro to Meditation),
+      Special Practices (Yoga in the Park, Asana Intensive, Chair Yoga), Education (philosophy,
+      Ayurveda), Retreats. Teacher Trainings likely **out of events** (own page + external links).
+- [ ] `/events` list (upcoming only) with **category filter** (Workshops & Courses / All events) + `/events/[slug]`
+- [ ] Preserve verbatim "Lifelong Learning" intro on the curated view
 - [ ] Homepage "Upcoming Events" block
 - [ ] Seed current live events
+- [ ] Replace the interim `/events` placeholder (currently carries the intro copy)
 
 ### Epic 6 — Sveltia CMS
 

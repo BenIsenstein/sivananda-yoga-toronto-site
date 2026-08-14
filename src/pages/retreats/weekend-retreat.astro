@@ -3,6 +3,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Card from '@/components/ui/Card.astro';
 import Button from '@/components/ui/Button.astro';
+import hero from '@/assets/retreats/meditative-retreat.png';
 
 const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=55564857';
 
@@ -44,6 +45,8 @@ const schedule = [
   title="Weekend Yoga Retreat"
   lead="Experience the harmony, peace and balance of yoga at the Mansfield Outdoor Centre, north of Toronto."
   description="A weekend yoga retreat at the Mansfield Outdoor Centre near Barrie, Ontario — all levels welcome."
+  heroImage={hero}
+  heroAlt="Yoga retreat in nature"
   narrow
 >
   <Prose>

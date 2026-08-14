@@ -1,37 +1,50 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import Card from '@/components/ui/Card.astro';
+import { Image } from 'astro:assets';
+import imgTeachers from '@/assets/about/hub-teachers.jpg';
+import imgTeachings from '@/assets/about/hub-teachings.jpg';
+import imgCentre from '@/assets/about/hub-centre.jpg';
+import imgNew from '@/assets/about/new-to-yoga.jpg';
+import imgFaq from '@/assets/about/hub-faq.jpg';
+import imgOutreach from '@/assets/about/hub-outreach.jpg';
 
 const cards = [
   {
     title: 'Our Teachers',
     body: 'We follow the teachings of Swami Sivananda and Swami Vishnudevananda, the inspiration and founders of the International Sivananda Yoga Vedanta Centres.',
     href: '/about/teachers',
+    image: imgTeachers,
   },
   {
     title: 'Our Teachings',
     body: 'A traditional, exact and easy-to-learn system that creates a healthy body and mind, leading to spiritual growth.',
     href: '/about/what-we-teach',
+    image: imgTeachings,
   },
   {
     title: 'Our Centre',
     body: "Located in Toronto's Annex neighbourhood, near Bloor & Spadina, and part of the International Sivananda Yoga Vedanta Centres, a non-profit organization.",
     href: '/about/our-centre',
+    image: imgCentre,
   },
   {
     title: 'New to Yoga?',
     body: 'Starting yoga can feel overwhelming — but it need not be. See our recommendations for where to begin.',
     href: '/new-to-yoga',
+    image: imgNew,
   },
   {
     title: 'Common Questions',
     body: 'Questions new students often ask — about parking, yoga mats, what to wear, and more.',
     href: '/faq',
+    image: imgFaq,
   },
   {
     title: 'Community Outreach',
     body: 'Your participation at our Centre helps support a wide range of community outreach programs.',
     href: '/about/community-outreach',
+    image: imgOutreach,
   },
 ];
 ---
@@ -45,10 +58,18 @@ const cards = [
     {
       cards.map((c) => (
         <a href={c.href} class="group">
-          <Card class="flex h-full flex-col p-6 transition-colors group-hover:border-primary">
-            <h2 class="font-serif text-2xl text-foreground">{c.title}</h2>
-            <p class="mt-2 flex-1 text-muted-foreground">{c.body}</p>
-            <span class="mt-4 text-sm font-medium text-primary">Read more &rarr;</span>
+          <Card class="flex h-full flex-col overflow-hidden transition-colors group-hover:border-primary">
+            <Image
+              src={c.image}
+              alt={c.title}
+              loading="lazy"
+              class="aspect-video w-full object-cover"
+            />
+            <div class="flex flex-1 flex-col p-6">
+              <h2 class="font-serif text-2xl text-foreground">{c.title}</h2>
+              <p class="mt-2 flex-1 text-muted-foreground">{c.body}</p>
+              <span class="mt-4 text-sm font-medium text-primary">Read more &rarr;</span>
+            </div>
           </Card>
         </a>
       ))

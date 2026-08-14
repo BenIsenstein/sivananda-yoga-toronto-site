@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '@/layouts/PageLayout.astro';
 import Card from '@/components/ui/Card.astro';
+import { Image } from 'astro:assets';
 
 const courses = (await getCollection('courses', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
@@ -17,10 +18,20 @@ const courses = (await getCollection('courses', ({ data }) => !data.draft)).sort
     {
       courses.map((course) => (
         <a href={`/courses/${course.id}`} class="group">
-          <Card class="flex h-full flex-col p-6 transition-colors group-hover:border-primary">
-            <h2 class="font-serif text-2xl text-foreground">{course.data.title}</h2>
-            <p class="mt-2 flex-1 text-muted-foreground">{course.data.summary}</p>
-            <span class="mt-4 text-sm font-medium text-primary">Learn more &rarr;</span>
+          <Card class="flex h-full flex-col overflow-hidden transition-colors group-hover:border-primary">
+            {course.data.image && (
+              <Image
+                src={course.data.image}
+                alt={course.data.imageAlt ?? course.data.title}
+                loading="lazy"
+                class="aspect-video w-full object-cover"
+              />
+            )}
+            <div class="flex flex-1 flex-col p-6">
+              <h2 class="font-serif text-2xl text-foreground">{course.data.title}</h2>
+              <p class="mt-2 flex-1 text-muted-foreground">{course.data.summary}</p>
+              <span class="mt-4 text-sm font-medium text-primary">Learn more &rarr;</span>
+            </div>
           </Card>
         </a>
       ))

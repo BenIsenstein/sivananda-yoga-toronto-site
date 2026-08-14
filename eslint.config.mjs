@@ -17,5 +17,14 @@ export default tseslint.config(
         astroHTML: 'readonly',
       },
     },
+  },
+  {
+    // Node-run config files may use Node globals (e.g. process.env).
+    files: ['*.config.{js,mjs,cjs,ts}'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+      },
+    },
   }
 );

@@ -2,13 +2,25 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import Gallery from '@/components/Gallery.astro';
 import { site } from '@/config/site';
+import hall1 from '@/assets/about/rental-hall-1.jpeg';
+import hall2 from '@/assets/about/rental-hall-2.jpg';
+import hall3 from '@/assets/satsang/satsang.jpg';
+
+const gallery = [
+  { src: hall1, alt: 'Sunlit yoga hall' },
+  { src: hall2, alt: 'Yoga hall at the Centre' },
+  { src: hall3, alt: 'Smaller hall set up for a gathering' },
+];
 ---
 
 <PageLayout
   title="Yoga Halls Rental"
   lead="Rental space for yoga and related classes, courses and events when our own classes are not scheduled."
   description="Rent our sunlit yoga halls in the Annex for classes, workshops, lectures and gatherings."
+  heroImage={hall1}
+  heroAlt="Our spacious, sunlit yoga hall"
   narrow
 >
   <Prose>
@@ -36,4 +48,6 @@ import { site } from '@/config/site';
   <div class="mt-8">
     <Button href={`mailto:${site.contact.email}`}>Enquire about rentals</Button>
   </div>
+
+  <Gallery images={gallery} class="mt-10" />
 </PageLayout>

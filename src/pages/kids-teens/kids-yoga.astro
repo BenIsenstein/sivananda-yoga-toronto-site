@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import hero from '@/assets/kids-teens/kids-yoga.jpg';
 
 const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=19772532';
 ---
@@ -10,6 +11,8 @@ const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=19772532';
   title="Kids Yoga"
   lead="Playful, story-filled yoga that helps children build healthy body-and-mind habits."
   description="Kids yoga classes at the Toronto Sivananda Yoga Vedanta Centre — ages 5 to 12."
+  heroImage={hero}
+  heroAlt="Children practising yoga"
   narrow
 >
   <Prose>

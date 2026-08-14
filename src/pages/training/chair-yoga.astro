@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
+import hero from '@/assets/training/chair-yoga.jpg';
 
 const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18409110';
 ---
@@ -10,6 +11,8 @@ const registerUrl = 'https://SivanandaToronto.as.me/?appointmentType=18409110';
   title="Chair Yoga Teacher Training"
   lead="Tools to teach chair yoga — helping students build strength, awareness and confidence."
   description="Chair Yoga Teacher Training at the Toronto Sivananda Yoga Vedanta Centre."
+  heroImage={hero}
+  heroAlt="Chair yoga teacher training"
   narrow
 >
   <Prose>

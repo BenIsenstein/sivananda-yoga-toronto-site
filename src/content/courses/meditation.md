@@ -2,6 +2,8 @@
 title: Meditation Courses
 summary: Meditation is the most important of all Yoga techniques — an invaluable tool for emotional balance and peace of mind.
 order: 1
+image: ../../assets/courses/meditation-1.jpg
+imageAlt: Meditation practice at the Sivananda Yoga Centre
 registerUrl: 'https://SivanandaToronto.as.me/?appointmentType=60025363'
 ---
 

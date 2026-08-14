@@ -3,12 +3,15 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Button from '@/components/ui/Button.astro';
 import { site } from '@/config/site';
+import hero from '@/assets/fundraiser/fundraiser.jpg';
 ---
 
 <PageLayout
   title="Support Our Centre"
   lead="As a registered charity and non-profit, your support helps us keep yoga accessible to all."
   description="Support the Toronto Sivananda Yoga Vedanta Centre through donations, connections and volunteering."
+  heroImage={hero}
+  heroAlt="The Toronto Sivananda Yoga Vedanta Centre"
   narrow
 >
   <Prose>

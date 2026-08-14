@@ -2,6 +2,8 @@
 title: Pranayama
 summary: Breathing practices that strengthen the respiratory system, increase stamina and calm the mind.
 order: 3
+image: ../../assets/courses/pranayama.jpg
+imageAlt: Pranayama breathing practice
 ---
 
 Pranayama (breathing exercises) helps strengthen the respiratory system, increase stamina and maintain good physical health. It also helps keep the mind calm and peaceful. We periodically offer focused pranayama courses and challenges — including guided morning practices combining Sun Salutations to warm up the body, extended pranayama, and guided relaxation.
