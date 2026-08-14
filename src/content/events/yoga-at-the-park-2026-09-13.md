@@ -3,12 +3,10 @@ title: Yoga at the Park
 categories:
   - Special Practices
 start: 2026-09-13
-end: ''
 time: Sunday 9–10:30 am
 price: By donation
 image: ../../assets/events/yoga-at-the-park.jpg
 imageAlt: Practising yoga outdoors in the park
-teacher: ''
 registerUrl: https://checkout.square.site/merchant/MLVFQVFE88V53/checkout/6LZW7K4VLLAYOYUOVJ3STY2P
 registerNote: Registration is by donation. Please donate via Square, then email us at toronto@sivananda.org to let us know which date you're attending.
 ongoing: false

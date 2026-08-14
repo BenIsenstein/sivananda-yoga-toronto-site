@@ -1,5 +1,18 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod'
 import { glob } from 'astro/loaders';
+
+/** The CMS (Sveltia) writes empty optional fields as `""`. Treat blank/whitespace
+ * strings as "not provided" so they don't fail date/url/enum validation. */
+const emptyToUndefined = (value: unknown) =>
+  typeof value === 'string' && value.trim() === '' ? undefined : value;
+
+/** Optional date that tolerates empty-string input from the CMS. */
+const optionalDate = () => z.preprocess(emptyToUndefined, z.coerce.date().optional());
+/** Optional string that tolerates (and drops) empty-string input from the CMS. */
+const optionalString = () => z.preprocess(emptyToUndefined, z.string().optional());
+/** Optional URL that tolerates empty-string input from the CMS. */
+const optionalUrl = () => z.preprocess(emptyToUndefined, z.url().optional());
 
 /** Uniform course pages — power the /courses hub grid and individual pages. */
 const courses = defineCollection({
@@ -11,9 +24,9 @@ const courses = defineCollection({
       order: z.number().default(99),
       /** Optional hero image (relative path from the markdown file). */
       image: image().optional(),
-      imageAlt: z.string().optional(),
+      imageAlt: optionalString(),
       /** Optional Acuity registration/catalog link. */
-      registerUrl: z.url().optional(),
+      registerUrl: optionalUrl(),
       draft: z.boolean().default(false),
     }),
 });
@@ -37,22 +50,22 @@ const events = defineCollection({
       /** One or more of the fixed category labels. */
       categories: z.array(z.enum(EVENT_CATEGORIES)).nonempty(),
       /** Start date (date-only). Omit for ongoing/undated items. */
-      start: z.coerce.date().optional(),
+      start: optionalDate(),
       /** Optional end date for multi-day ranges. */
-      end: z.coerce.date().optional(),
+      end: optionalDate(),
       /** Free-text time, e.g. "6:30–7:45 pm". Shown for single-day events. */
-      time: z.string().optional(),
+      time: optionalString(),
       /** Free-text price, e.g. "$120", "By donation". */
-      price: z.string().optional(),
+      price: optionalString(),
       /** Optional hero image (relative path from the markdown file). */
       image: image().optional(),
-      imageAlt: z.string().optional(),
+      imageAlt: optionalString(),
       /** Optional teacher/facilitator name. */
-      teacher: z.string().optional(),
+      teacher: optionalString(),
       /** Registration link (Acuity, Square, etc.). */
-      registerUrl: z.url().optional(),
+      registerUrl: optionalUrl(),
       /** Free-text fallback for donation/email registration cases. */
-      registerNote: z.string().optional(),
+      registerNote: optionalString(),
       /** Undated items that always show and sort last (e.g. teacher trainings). */
       ongoing: z.boolean().default(false),
       draft: z.boolean().default(false),
@@ -66,7 +79,7 @@ const policies = defineCollection({
     title: z.string(),
     order: z.number().default(99),
     /** Optional PDF served from /public (e.g. misconduct policy). Local path or URL. */
-    pdfUrl: z.string().optional(),
+    pdfUrl: optionalString(),
   }),
 });
 
