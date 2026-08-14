@@ -24,11 +24,18 @@ export const site = {
     city: 'Toronto',
     region: 'ON',
     postalCode: 'M5S 1G4',
+    country: 'CA',
     phone: '(416) 966-9642',
     phoneHref: 'tel:+14169669642',
     email: 'toronto@sivananda.org',
     mapUrl: 'https://goo.gl/maps/nVnPhLyEiiN2',
+    /** Geo coordinates of 77 Harbord Street (for LocalBusiness schema). */
+    geo: { latitude: 43.6607, longitude: -79.4046 },
   },
+  /** Rough price band for LocalBusiness schema. */
+  priceRange: '$$',
+  /** Year the current centre was established (per BACKLOG timeline). */
+  foundingYear: '1992',
   /** Opening hours, verbatim from the contact page. */
   hours: [
     { day: 'Monday', times: '4:30–9 pm' },
@@ -38,6 +45,21 @@ export const site = {
     { day: 'Friday', times: '9–11:30 am, 4:30–9 pm' },
     { day: 'Saturday', times: '9 am–1 pm, 3:30–6 pm' },
     { day: 'Sunday', times: '3:30–8 pm' },
+  ],
+  /** Machine-readable opening hours (24h "HH:MM") for LocalBusiness JSON-LD.
+   *  Mirrors the human `hours` above; each row is one continuous open interval. */
+  hoursSpec: [
+    { day: 'Monday', opens: '16:30', closes: '21:00' },
+    { day: 'Tuesday', opens: '09:00', closes: '11:30' },
+    { day: 'Tuesday', opens: '16:30', closes: '21:00' },
+    { day: 'Wednesday', opens: '16:30', closes: '21:00' },
+    { day: 'Thursday', opens: '09:00', closes: '11:30' },
+    { day: 'Thursday', opens: '16:30', closes: '21:00' },
+    { day: 'Friday', opens: '09:00', closes: '11:30' },
+    { day: 'Friday', opens: '16:30', closes: '21:00' },
+    { day: 'Saturday', opens: '09:00', closes: '13:00' },
+    { day: 'Saturday', opens: '15:30', closes: '18:00' },
+    { day: 'Sunday', opens: '15:30', closes: '20:00' },
   ],
   /** Local booking route (embeds the Acuity scheduler on /book). */
   book: '/book',

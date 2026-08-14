@@ -14,13 +14,17 @@ export async function getStaticPaths() {
 
 const { policy } = Astro.props;
 const { Content } = await render(policy);
+
+// Description from the first line(s) of the policy body, else a sensible fallback.
+const excerpt = (policy.body ?? '')
+  .replace(/[#>*_`-]/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 160);
+const description = excerpt || `${policy.data.title} — Toronto Sivananda Yoga Vedanta Centre.`;
 ---
 
-<PageLayout
-  title={policy.data.title}
-  description={`${policy.data.title} — Toronto Sivananda Yoga Vedanta Centre.`}
-  narrow
->
+<PageLayout title={policy.data.title} description={description} noindex narrow>
   <Prose>
     <Content />
   </Prose>

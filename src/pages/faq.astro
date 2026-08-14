@@ -86,12 +86,30 @@ const groups = [
     ],
   },
 ];
+
+// FAQPage JSON-LD: strip HTML tags from answers for the plain-text `text`.
+const stripHtml = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+const faqJsonLd = {
+  '@type': 'FAQPage',
+  mainEntity: groups.flatMap((group) =>
+    group.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: stripHtml(item.a) },
+    }))
+  ),
+};
 ---
 
 <PageLayout
   title="Frequently Asked Questions"
   lead="Questions new students often ask. If yours isn't answered here, please contact us."
   description="Common questions about classes, what to bring, prices, location and parking."
+  jsonLd={faqJsonLd}
   narrow
 >
   <div class="space-y-10">

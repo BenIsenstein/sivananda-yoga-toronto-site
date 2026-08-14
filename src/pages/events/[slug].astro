@@ -1,10 +1,12 @@
 ---
 import { render } from 'astro:content';
+import { getImage } from 'astro:assets';
 import PageLayout from '@/layouts/PageLayout.astro';
 import Prose from '@/components/Prose.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
 import { getVisibleEvents, formatEventDate, type EventEntry } from '@/lib/events';
+import { eventSchema } from '@/lib/schema';
 
 export async function getStaticPaths() {
   const events = await getVisibleEvents();
@@ -23,13 +25,35 @@ const { data } = event;
 const { Content } = await render(event);
 const dateLabel = formatEventDate(data);
 const singleDay = !!data.start && !data.end;
+
+// Absolute, optimized OG/schema image URL (when the event has an image).
+let ogImage: string | undefined;
+if (data.image && Astro.site) {
+  const built = await getImage({ src: data.image, format: 'webp', width: 1200 });
+  ogImage = new URL(built.src, Astro.site).href;
+}
+
+// Meta description: first non-empty line of the body, else a sensible fallback.
+const rawBody = event.body ?? '';
+const bodyExcerpt = rawBody
+  .replace(/[#>*_`-]/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 160);
+const metaDescription =
+  bodyExcerpt || [data.title, dateLabel, data.teacher].filter(Boolean).join(' · ') || data.title;
+
+const jsonLd = eventSchema(event, Astro.site, ogImage);
 ---
 
 <PageLayout
   title={data.title}
-  description={data.imageAlt ?? data.title}
+  description={metaDescription}
   heroImage={data.image}
   heroAlt={data.imageAlt ?? data.title}
+  ogType="article"
+  ogImage={ogImage}
+  jsonLd={jsonLd}
   narrow
 >
   <div class="mb-6 flex flex-wrap gap-2">

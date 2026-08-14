@@ -29,5 +29,15 @@ export default tseslint.config(
         process: 'readonly',
       },
     },
+  },
+  {
+    // Node utility scripts (build helpers) run in Node and use its globals.
+    files: ['scripts/**/*.{js,mjs,cjs,ts}'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        console: 'readonly',
+      },
+    },
   }
 );

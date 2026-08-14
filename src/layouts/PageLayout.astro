@@ -19,12 +19,37 @@ interface Props {
   /** Optional hero image shown above the content. */
   heroImage?: ImageMetadata;
   heroAlt?: string;
+  /** SEO passthroughs. */
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Absolute OG image URL. */
+  ogImage?: string;
 }
 
-const { title, description, lead, narrow = false, heroImage, heroAlt } = Astro.props;
+const {
+  title,
+  description,
+  lead,
+  narrow = false,
+  heroImage,
+  heroAlt,
+  ogType,
+  noindex,
+  jsonLd,
+  ogImage,
+} = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  image={ogImage}
+  imageAlt={heroAlt ?? title}
+  ogType={ogType}
+  noindex={noindex}
+  jsonLd={jsonLd}
+>
   <Header />
   <main>
     <div class="border-b border-border bg-muted/40">

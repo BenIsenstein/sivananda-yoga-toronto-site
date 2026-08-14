@@ -1,13 +1,28 @@
 ---
 import '../styles/global.css';
 import { site } from '@/config/site';
+import Seo from '@/components/Seo.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Absolute OG image URL (optional). */
+  image?: string;
+  imageAlt?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = site.description } = Astro.props;
+const {
+  title,
+  description = site.description,
+  image,
+  imageAlt,
+  ogType,
+  noindex,
+  jsonLd,
+} = Astro.props;
 const pageTitle = title ? `${title} | ${site.shortName}` : site.name;
 ---
 
@@ -20,6 +35,15 @@ const pageTitle = title ? `${title} | ${site.shortName}` : site.name;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <Seo
+      title={pageTitle}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      ogType={ogType}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
     {/* No-flash theme init: set .dark before first paint */}
     <script is:inline>
       (function () {

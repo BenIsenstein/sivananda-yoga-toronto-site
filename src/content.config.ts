@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { z } from 'astro/zod'
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 /** The CMS (Sveltia) writes empty optional fields as `""`. Treat blank/whitespace

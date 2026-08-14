@@ -1,0 +1,69 @@
+---
+/**
+ * Seo — centralizes all <head> SEO tags: canonical URL, Open Graph, Twitter
+ * Card, robots, and optional per-page JSON-LD. Rendered inside Layout's <head>.
+ *
+ * Canonical/OG URLs are absolute, derived from `Astro.site` (the `site:` value
+ * in astro.config.mjs) so they follow the domain cutover automatically.
+ */
+import { site } from '@/config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute OG image URL (optional — omitted when not provided). */
+  image?: string;
+  imageAlt?: string;
+  /** og:type — "website" for most pages, "article" for events. */
+  ogType?: 'website' | 'article';
+  /** Prevent indexing (e.g. theme-preview, 404). */
+  noindex?: boolean;
+  /** Extra JSON-LD objects to embed (LocalBusiness, Event, etc.). */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  ogType = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+// Absolute canonical URL for the current page (trailing-slash-normalized by Astro).
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta name="theme-color" content="#8a5a44" />
+
+{/* Open Graph */}
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{image && <meta property="og:image" content={image} />}
+{image && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+<meta property="og:locale" content="en_CA" />
+
+{/* Twitter Card */}
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}
+
+{
+  jsonLdList.map((obj) => (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({ '@context': 'https://schema.org', ...obj })}
+    />
+  ))
+}

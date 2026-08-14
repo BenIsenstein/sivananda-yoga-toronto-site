@@ -3,14 +3,17 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import Card from '@/components/ui/Card.astro';
 import Prose from '@/components/Prose.astro';
 import { site } from '@/config/site';
+import { localBusinessGraph } from '@/lib/schema';
 
 const { contact, hours } = site;
+const jsonLd = localBusinessGraph(Astro.site);
 ---
 
 <PageLayout
   title="Contact"
   lead="We're in the Annex, a couple of blocks south of Spadina & Bloor, across from the University of Toronto."
   description="Visit the Toronto Sivananda Yoga Vedanta Centre at 77 Harbord Street — address, hours and directions."
+  jsonLd={jsonLd}
 >
   <div class="grid gap-6 md:grid-cols-2">
     <Card class="p-6">

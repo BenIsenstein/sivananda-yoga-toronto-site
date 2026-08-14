@@ -9,10 +9,15 @@ import Button from '@/components/ui/Button.astro';
 import EventCard from '@/components/EventCard.astro';
 import { site } from '@/config/site';
 import { getVisibleEvents } from '@/lib/events';
+import { localBusinessGraph } from '@/lib/schema';
 
 const upcomingEvents = (await getVisibleEvents())
   .filter((event) => !event.data.ongoing)
   .slice(0, 3);
+
+const homeDescription =
+  'Toronto Sivananda Yoga Vedanta Centre at 77 Harbord Street — classical Hatha yoga classes, meditation, courses, workshops and retreats in the Sivananda tradition since 1992.';
+const jsonLd = localBusinessGraph(Astro.site);
 
 const highlights = [
   {
@@ -33,7 +38,7 @@ const highlights = [
 ];
 ---
 
-<Layout>
+<Layout description={homeDescription} jsonLd={jsonLd}>
   <Header />
   <main>
     <Hero />

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Utility / non-content routes
+Disallow: /theme-preview
+Disallow: /admin
+
+Sitemap: https://sivananda-yoga-toronto-site.up.railway.app/sitemap-index.xml

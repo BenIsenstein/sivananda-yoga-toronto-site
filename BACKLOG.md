@@ -237,9 +237,9 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 7 — SEO & Redirects
 
-- [ ] `@astrojs/sitemap`, `robots.txt`
-- [ ] 301 redirect map old WP paths → new paths
-- [ ] Per-page meta, OG images, JSON-LD (LocalBusiness, Event)
+- [x] `@astrojs/sitemap`, `robots.txt`
+- [x] 301 redirect map old WP paths → new paths
+- [x] Per-page meta, OG images, JSON-LD (LocalBusiness, Event)
 
 ### Epic 8 — Deploy (Railway + GitHub)
 
@@ -247,6 +247,26 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 - [ ] Auto-deploy on `main`; env for CMS OAuth
 - [ ] Custom domain / DNS cutover; verify redirects & forms
 - [ ] Contact form provider (replace Caldera — Formspree/Web3Forms)
+
+> **Domain cutover checklist (SEO from Epic 7 depends on this):**
+>
+> 1. **Update `site:` in `astro.config.mjs`** to the production domain. This
+>    single value drives canonical URLs, Open Graph URLs, JSON-LD `@id`/`url`,
+>    and the `@astrojs/sitemap` output — all follow automatically.
+> 2. **`public/robots.txt`** — the `Sitemap:` line is **hardcoded** to the
+>    Railway staging domain. Update it to the production `sitemap-index.xml`.
+> 3. **`public/_redirects`** — external targets are absolute
+>    (`https://sivanandacanada.org/camp`); internal targets are root-relative
+>    and are domain-agnostic (no change needed). Regenerate with
+>    `node scripts/gen-redirects.mjs` if `src/config/redirects.mjs` changes.
+> 4. **Redirect delivery on Railway:** Astro emits static meta-refresh redirect
+>    pages (work anywhere, but 200-not-301). For true 301s, wire the
+>    `public/_redirects` rules into Railway's static server / edge config at
+>    deploy. Verify a sample (e.g. `/our-centre` → `/about/our-centre`,
+>    `/yoga-camp` → external ashram site) returns a real 301.
+> 5. **Post-cutover verification:** resubmit `sitemap-index.xml` in Google
+>    Search Console; spot-check canonical tags resolve to the production domain;
+>    confirm `noindex` still applies to `/policies/*`, `/theme-preview`, `/404`.
 
 ### Epic 9 — QA & Launch
 
