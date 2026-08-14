@@ -1,0 +1,155 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import EventCard from '@/components/EventCard.astro';
+import { site } from '@/config/site';
+import { EVENT_CATEGORIES } from '@/content.config';
+import { getVisibleEvents } from '@/lib/events';
+
+const events = await getVisibleEvents();
+const filters = ['All', ...EVENT_CATEGORIES] as const;
+---
+
+<PageLayout
+  title="Workshops & Events"
+  lead="Lifelong learning — workshops, events and specialized courses throughout the year."
+  description="Yoga workshops, events and specialized courses at the Toronto Sivananda Yoga Vedanta Centre."
+>
+  <Prose class="mb-8">
+    <h2>Lifelong Learning</h2>
+    <p>
+      If you would like to learn more about different aspects of yoga and related subjects, here are
+      our workshops, events and specialized courses. From cooking workshops to philosophy, hatha
+      yoga to chanting and ayurveda, all the programs are designed to help you achieve improved
+      physical, mental and spiritual well-being.
+    </p>
+    <p>
+      We add new topics and dates frequently. Check back regularly, or follow us on&nbsp;
+      <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> for updates.
+    </p>
+  </Prose>
+
+  {
+    events.length > 0 && (
+      <div class="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter events by category">
+        {filters.map((filter) => (
+          <button
+            type="button"
+            data-filter={filter}
+            class="event-filter inline-flex items-center rounded-full border border-border px-4 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+            aria-pressed={filter === 'All' ? 'true' : 'false'}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    events.length > 0 ? (
+      <div id="events-grid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {events.map((event) => (
+          <EventCard event={event} />
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-xl border border-border bg-muted/40 p-8 text-center">
+        <p class="text-muted-foreground">
+          No upcoming events right now — check back soon, or follow us on{' '}
+          <a
+            href={site.social.instagram}
+            class="font-medium text-primary underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>{' '}
+          for updates.
+        </p>
+      </div>
+    )
+  }
+
+  <div
+    id="events-empty-filter"
+    class="hidden rounded-xl border border-border bg-muted/40 p-8 text-center"
+  >
+    <p class="text-muted-foreground">
+      No events in this category right now. Try another category or view all events.
+    </p>
+  </div>
+</PageLayout>
+
+<script>
+  const QUERY_KEY = 'category';
+  const DEFAULT_FILTER = 'All';
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.event-filter');
+  const cards = document.querySelectorAll<HTMLAnchorElement>('[data-event-card]');
+  const emptyFilter = document.getElementById('events-empty-filter');
+
+  /** Valid filter labels, derived from the rendered pills. */
+  const validFilters = new Set(
+    Array.from(buttons, (button) => button.dataset.filter ?? DEFAULT_FILTER)
+  );
+
+  /** Read a valid filter from the URL, falling back to the default. */
+  function filterFromUrl(): string {
+    const value = new URLSearchParams(window.location.search).get(QUERY_KEY);
+    return value && validFilters.has(value) ? value : DEFAULT_FILTER;
+  }
+
+  /** Sync the query param to the URL without adding a history entry. */
+  function writeUrl(active: string, push: boolean) {
+    const url = new URL(window.location.href);
+    if (active === DEFAULT_FILTER) {
+      url.searchParams.delete(QUERY_KEY);
+    } else {
+      url.searchParams.set(QUERY_KEY, active);
+    }
+    const method = push ? 'pushState' : 'replaceState';
+    window.history[method]({}, '', url);
+  }
+
+  /** Show/hide cards and toggle the empty state for the active filter. */
+  function showCards(active: string) {
+    let visible = 0;
+    cards.forEach((card) => {
+      const categories = (card.dataset.categories ?? '').split('|');
+      const show = active === DEFAULT_FILTER || categories.includes(active);
+      card.classList.toggle('hidden', !show);
+      if (show) visible += 1;
+    });
+    emptyFilter?.classList.toggle('hidden', visible > 0);
+  }
+
+  /** Reflect the active filter in pill pressed-state. */
+  function markActive(active: string) {
+    buttons.forEach((button) => {
+      button.setAttribute(
+        'aria-pressed',
+        (button.dataset.filter ?? DEFAULT_FILTER) === active ? 'true' : 'false'
+      );
+    });
+  }
+
+  /** Apply a filter to the view, optionally syncing/pushing the URL. */
+  function applyFilter(active: string, options: { write?: boolean; push?: boolean } = {}) {
+    markActive(active);
+    showCards(active);
+    if (options.write) writeUrl(active, options.push ?? false);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      applyFilter(button.dataset.filter ?? DEFAULT_FILTER, { write: true, push: true });
+    });
+  });
+
+  // Keep the view in sync when the user navigates back/forward.
+  window.addEventListener('popstate', () => applyFilter(filterFromUrl()));
+
+  // Initialize from the URL (e.g. /events?category=Retreats), normalizing the URL.
+  applyFilter(filterFromUrl(), { write: true, push: false });
+</script>

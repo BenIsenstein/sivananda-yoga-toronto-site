@@ -1,0 +1,52 @@
+---
+/** EventCard — event summary card for the /events grid and homepage block. */
+import Card from '@/components/ui/Card.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { Image } from 'astro:assets';
+import { formatEventDate, type EventEntry } from '@/lib/events';
+
+interface Props {
+  event: EventEntry;
+}
+
+const { event } = Astro.props;
+const { data } = event;
+const dateLabel = formatEventDate(data);
+const singleDay = !!data.start && !data.end;
+---
+
+<a
+  href={`/events/${event.id}`}
+  class="group block"
+  data-event-card
+  data-categories={data.categories.join('|')}
+>
+  <Card class="flex h-full flex-col overflow-hidden transition-colors group-hover:border-primary">
+    {
+      data.image && (
+        <Image
+          src={data.image}
+          alt={data.imageAlt ?? data.title}
+          loading="lazy"
+          class="aspect-video w-full object-cover"
+        />
+      )
+    }
+    <div class="flex flex-1 flex-col p-6">
+      <div class="flex flex-wrap gap-2">
+        {data.categories.map((category) => <Badge variant="muted">{category}</Badge>)}
+      </div>
+      <h3 class="mt-3 font-serif text-2xl text-foreground">{data.title}</h3>
+      {
+        (dateLabel || data.ongoing) && (
+          <p class="mt-2 text-sm font-medium text-primary">
+            {data.ongoing ? 'Dates announced through the year' : dateLabel}
+            {singleDay && data.time && <span class="text-muted-foreground"> · {data.time}</span>}
+          </p>
+        )
+      }
+      {data.price && <p class="mt-1 text-sm text-muted-foreground">{data.price}</p>}
+      <span class="mt-4 text-sm font-medium text-primary">View details &rarr;</span>
+    </div>
+  </Card>
+</a>

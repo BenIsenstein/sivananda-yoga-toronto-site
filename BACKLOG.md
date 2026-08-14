@@ -200,23 +200,29 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 5 — Events (Model B)
 
+> **Full detailed spec: [`docs/epic-5-events-plan.md`](docs/epic-5-events-plan.md)** —
+> read that first; it captures every decision (categories, schema, date/time semantics,
+> filtering UX, seeding, images, CMS-readiness, build order, acceptance checklist).
+>
 > **Consolidates three live surfaces** (see `content-source/NOTES.md`):
 > `/yoga-workshop/` (curated Workshops & specialized courses + "Lifelong Learning" intro),
 > `/programs/` (full events superset, not in nav), and `/events/<slug>` (detail pages)
-> into a **single filterable `/events` collection**. Category filtering reproduces both a
-> curated "Workshops & Courses" view and an "All events" view; the "Lifelong Learning"
-> intro is preserved on the curated view.
+> into a **single filterable `/events` collection**. Show all events by default; filter
+> pills narrow by category. The "Lifelong Learning" intro is preserved atop `/events`.
 
-- [ ] `events` collection schema (title, start/end, price, image, teacher, body, acuityUrl, category)
-- [ ] Decide event **taxonomy → pages/collections** (owner input; see `content-source/NOTES.md`):
-      Regular Practices (static weekly calendar), Regular Courses (Yoga 1/2, Intro to Meditation),
-      Special Practices (Yoga in the Park, Asana Intensive, Chair Yoga), Education (philosophy,
-      Ayurveda), Retreats. Teacher Trainings likely **out of events** (own page + external links).
-- [ ] `/events` list (upcoming only) with **category filter** (Workshops & Courses / All events) + `/events/[slug]`
-- [ ] Preserve verbatim "Lifelong Learning" intro on the curated view
-- [ ] Homepage "Upcoming Events" block
-- [ ] Seed current live events
-- [ ] Replace the interim `/events` placeholder (currently carries the intro copy)
+- [x] `events` collection schema (title, categories, start/end, time, price, image, teacher,
+      registerUrl/registerNote, ongoing, draft, body) — CMS-ready
+- [x] Decided event **taxonomy → 5 categories** (see `docs/epic-5-events-plan.md`):
+      Regular Courses, Special Practices, Education, Retreats, Teacher Trainings (multiple
+      allowed). Regular Practices stay in the Epic 4 schedule grid. Teacher Trainings are
+      **in** events as `ongoing` entries linking to their `/training/*` pages.
+- [x] `/events` list (upcoming + ongoing) with client-side **category filter pills**
+      (All + 5) + `/events/[slug]` detail pages
+- [x] Preserve verbatim "Lifelong Learning" intro atop `/events`
+- [x] Homepage "Upcoming Events" block (next 3 + See all events)
+- [x] Seed current live events (all fetchable events from `/yoga-workshop` + `/programs`,
+      real dates, images downloaded + optimized; 3 TTs as ongoing)
+- [x] Replace the interim `/events` placeholder
 
 ### Epic 6 — Sveltia CMS
 

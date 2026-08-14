@@ -18,6 +18,47 @@ const courses = defineCollection({
     }),
 });
 
+/** Fixed category list for events (CMS-ready select). Excludes weekly "Regular
+ * Practices" — those live in the Epic 4 schedule grid, not the events collection. */
+export const EVENT_CATEGORIES = [
+  'Regular Courses',
+  'Special Practices',
+  'Education',
+  'Retreats',
+  'Teacher Trainings',
+] as const;
+
+/** Workshops, courses, retreats & trainings — the filterable /events collection. */
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      /** One or more of the fixed category labels. */
+      categories: z.array(z.enum(EVENT_CATEGORIES)).nonempty(),
+      /** Start date (date-only). Omit for ongoing/undated items. */
+      start: z.coerce.date().optional(),
+      /** Optional end date for multi-day ranges. */
+      end: z.coerce.date().optional(),
+      /** Free-text time, e.g. "6:30–7:45 pm". Shown for single-day events. */
+      time: z.string().optional(),
+      /** Free-text price, e.g. "$120", "By donation". */
+      price: z.string().optional(),
+      /** Optional hero image (relative path from the markdown file). */
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      /** Optional teacher/facilitator name. */
+      teacher: z.string().optional(),
+      /** Registration link (Acuity, Square, etc.). */
+      registerUrl: z.url().optional(),
+      /** Free-text fallback for donation/email registration cases. */
+      registerNote: z.string().optional(),
+      /** Undated items that always show and sort last (e.g. teacher trainings). */
+      ongoing: z.boolean().default(false),
+      draft: z.boolean().default(false),
+    }),
+});
+
 /** Policy pages — uniform legal/prose shape. */
 const policies = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/policies' }),
@@ -29,4 +70,4 @@ const policies = defineCollection({
   }),
 });
 
-export const collections = { courses, policies };
+export const collections = { courses, events, policies };

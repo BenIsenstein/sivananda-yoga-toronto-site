@@ -6,6 +6,13 @@ import Hero from '@/components/Hero.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Card from '@/components/ui/Card.astro';
 import Button from '@/components/ui/Button.astro';
+import EventCard from '@/components/EventCard.astro';
+import { site } from '@/config/site';
+import { getVisibleEvents } from '@/lib/events';
+
+const upcomingEvents = (await getVisibleEvents())
+  .filter((event) => !event.data.ongoing)
+  .slice(0, 3);
 
 const highlights = [
   {
@@ -43,6 +50,45 @@ const highlights = [
               </Button>
             </Card>
           ))
+        }
+      </div>
+    </section>
+
+    <section class="border-t border-border bg-muted/40">
+      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-3xl text-foreground sm:text-4xl">Upcoming Events</h2>
+            <p class="mt-2 max-w-2xl text-muted-foreground">
+              Workshops, courses and gatherings throughout the year.
+            </p>
+          </div>
+          <Button href="/events" variant="outline" size="sm">See all events</Button>
+        </div>
+
+        {
+          upcomingEvents.length > 0 ? (
+            <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {upcomingEvents.map((event) => (
+                <EventCard event={event} />
+              ))}
+            </div>
+          ) : (
+            <div class="mt-10 rounded-xl border border-border bg-card p-8 text-center">
+              <p class="text-muted-foreground">
+                No upcoming events right now — check back soon, or follow us on{' '}
+                <a
+                  href={site.social.instagram}
+                  class="font-medium text-primary underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>{' '}
+                for updates.
+              </p>
+            </div>
+          )
         }
       </div>
     </section>

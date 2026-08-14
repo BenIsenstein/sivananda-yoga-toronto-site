@@ -1,0 +1,98 @@
+---
+import { render } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+import Prose from '@/components/Prose.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import { getVisibleEvents, formatEventDate, type EventEntry } from '@/lib/events';
+
+export async function getStaticPaths() {
+  const events = await getVisibleEvents();
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event },
+  }));
+}
+
+interface Props {
+  event: EventEntry;
+}
+
+const { event } = Astro.props;
+const { data } = event;
+const { Content } = await render(event);
+const dateLabel = formatEventDate(data);
+const singleDay = !!data.start && !data.end;
+---
+
+<PageLayout
+  title={data.title}
+  description={data.imageAlt ?? data.title}
+  heroImage={data.image}
+  heroAlt={data.imageAlt ?? data.title}
+  narrow
+>
+  <div class="mb-6 flex flex-wrap gap-2">
+    {data.categories.map((category) => <Badge variant="muted">{category}</Badge>)}
+  </div>
+
+  <dl class="mb-8 grid gap-4 rounded-xl border border-border bg-muted/40 p-6 sm:grid-cols-2">
+    {
+      (dateLabel || data.ongoing) && (
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Dates</dt>
+          <dd class="mt-1 text-foreground">
+            {data.ongoing ? 'Announced through the year' : dateLabel}
+          </dd>
+        </div>
+      )
+    }
+    {
+      singleDay && data.time && (
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Time</dt>
+          <dd class="mt-1 text-foreground">{data.time}</dd>
+        </div>
+      )
+    }
+    {
+      data.price && (
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Price</dt>
+          <dd class="mt-1 text-foreground">{data.price}</dd>
+        </div>
+      )
+    }
+    {
+      data.teacher && (
+        <div>
+          <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Teacher</dt>
+          <dd class="mt-1 text-foreground">{data.teacher}</dd>
+        </div>
+      )
+    }
+  </dl>
+
+  <Prose>
+    <Content />
+  </Prose>
+
+  {
+    (data.registerUrl || data.registerNote) && (
+      <div class="mt-8 space-y-3">
+        {data.registerUrl && (
+          <Button href={data.registerUrl} external>
+            Register
+          </Button>
+        )}
+        {data.registerNote && <p class="text-sm text-muted-foreground">{data.registerNote}</p>}
+      </div>
+    )
+  }
+
+  <div class="mt-10">
+    <a href="/events" class="text-sm font-medium text-primary hover:underline">
+      &larr; Back to all events
+    </a>
+  </div>
+</PageLayout>
