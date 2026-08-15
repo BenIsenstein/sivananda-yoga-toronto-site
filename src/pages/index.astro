@@ -48,10 +48,10 @@ const highlights = [
         {
           highlights.map((h) => (
             <Card class="flex flex-col p-6">
-              <h3 class="text-2xl text-foreground">{h.title}</h3>
+              <h2 class="text-2xl text-foreground">{h.title}</h2>
               <p class="mt-2 flex-1 text-muted-foreground">{h.body}</p>
               <Button href={h.href} variant="outline" size="sm" class="mt-5 self-start">
-                Learn more
+                Learn more<span class="sr-only"> about {h.title}</span>
               </Button>
             </Card>
           ))

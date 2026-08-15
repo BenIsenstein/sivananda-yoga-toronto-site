@@ -18,7 +18,7 @@ classes:
     end: '12:00'
     label: Intermediate
     classType: Intermediate
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'
 
   # 5:00 – 6:30 PM
   - day: Tuesday
@@ -32,7 +32,7 @@ classes:
     end: '18:30'
     label: Intermediate
     classType: Intermediate
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'
 
   # 6:30 – 8:00 PM
   - day: Monday
@@ -40,22 +40,22 @@ classes:
     end: '20:00'
     label: Intermediate
     classType: Intermediate
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'
   - day: Wednesday
     start: '18:30'
     end: '20:00'
     label: Intermediate
     classType: Intermediate
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'
   - day: Thursday
     start: '18:30'
     end: '20:00'
     label: Intermediate
     classType: Intermediate
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'
   - day: Friday
     start: '18:30'
     end: '20:00'
     label: Variations
     classType: Variations
-    acuity: 'https://sivanandatoronto.as.me/openclass'
+    acuity: 'https://SivanandaToronto.as.me/?appointmentType=category:Classes%20Online'

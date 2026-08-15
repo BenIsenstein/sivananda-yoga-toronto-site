@@ -270,5 +270,40 @@ All pages light + dark aware; verbatim copy from `content-source/NOTES.md`; imag
 
 ### Epic 9 — QA & Launch
 
-- [ ] Responsive / a11y / Lighthouse pass; broken-link + Acuity/Square check
+- [x] **A11y / Lighthouse pass** — Lighthouse run against the live Railway deploy
+      and re-verified locally after fixes. Baseline live scores: home Perf 96 /
+      **A11y 93** / Best-Practices 100 / SEO 92; schedule/events/book/contact
+      A11y 95–100. Fixed all flagged a11y/SEO issues → **home, schedule, book now
+      A11y 100 / SEO 100** with zero remaining audit failures:
+  - CtaBand body text contrast (`text-primary-foreground/90` → full opacity; was 4.14, now passes 4.5).
+  - Heading order: homepage highlight cards `<h3>`→`<h2>`; `ScheduleGrid` mobile
+    day headers `<h3>`→`<h2>` (fixes h1→h3 skips).
+  - Non-descriptive link text: homepage "Learn more" buttons get a visually-hidden
+    (`sr-only`) per-card suffix (unique for AT/SEO, unchanged visually).
+  - Link-in-text (book page): Acuity fallback link now underlined (no longer
+    relies on colour alone).
+  - Verified decorative Hero background images correctly use `alt=""` +
+    `aria-hidden` (not a defect); all `<html lang>`, image alts, and form labels present.
+- [x] **Responsive: mobile menu** — fixed a real rendering bug where the drawer
+      collapsed to ~80px. Root cause: the menu lived inside `<header>`, whose
+      `backdrop-filter` became the containing block for the `fixed` panel. Moved
+      the menu to a sibling of `<header>` and rebuilt it as a full-screen overlay
+      (fills full width + everything below the 64px header), slide-down/fade,
+      hamburger↔X, accordions with per-section "overview" links, footer with Book
+      CTA + contact + socials. Added dialog a11y (role=dialog/aria-modal, focus-in,
+      Tab-trap, focus-restore; close via X/Esc/link-tap/resize-to-lg). Verified
+      with **Playwright** at 390×844 & 360×640 (12 tests: panel = full width, y=64,
+      reaches viewport bottom; scroll-lock; Esc/link close; dark mode). Run with
+      `pnpm test:e2e`.
+- [x] **Broken-link + external-link check** (`pnpm check:links`, via
+      `scripts/check-links.mjs`) — crawled all 122 built pages: **0 broken internal
+      links**. HTTP-checked 54 unique external URLs (browser UA, follow redirects):
+      52× 200. Fixed 1 real dead link — the 6 Intermediate/Variations online
+      classes pointed to `sivanandatoronto.as.me/openclass` (404); repointed to the
+      working online-classes catalog (`?appointmentType=category:Classes Online`, 200) in `schedule-online.yaml`. Remaining 400 = `facebook.com` bot block
+      (false positive; valid in-browser). All Acuity/Square/Constant Contact/social/
+      maps/ashram links verified reachable.
+- [ ] Remaining QA (deferred): performance/cache tuning (Lighthouse perf insights:
+      image sizing, cache-TTL, render-blocking), broader responsive spot-check of
+      other pages.
 - [ ] Content owner sign-off; go-live
